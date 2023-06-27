@@ -1,0 +1,34 @@
+@import '__dimen.scss';
+@import '__color.scss';
+
+
+.Signup__container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Signup__innerContainer {
+  background-color: $bg-grey;
+  padding: $padding-3;
+}
+
+.my-2 {
+  margin-top: 12px;
+  margin-top: 12px;
+}
+
+.Signup__form_header {
+  display: flex;
+  justify-content: center;
+}
+
+.Signup__form_footer {
+  display: flex;
+  justify-content: center;
+}

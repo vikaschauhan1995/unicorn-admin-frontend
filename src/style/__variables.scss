@@ -1,0 +1,15 @@
+@import '__dimen.scss';
+@import '__color.scss';
+
+:export {
+  primaryColor: $primary-color;
+  bgGrey: $bg-grey;
+}
+
+:export {
+  buttonPadding: $button-padding;
+  buttonBorderRadius: $button-border-radius;
+  padding1: $padding-1;
+  padding3: $padding-3;
+  margin2: $margin-2;
+}

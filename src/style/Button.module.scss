@@ -1,0 +1,18 @@
+@import '__color.scss';
+@import '__dimen.scss';
+
+.btn {
+  background-color: white;
+  border: 1px solid $primary-color;
+  padding: $button-padding;
+  border-radius: $button-border-radius;
+  color: $primary-color;
+}
+
+.btn:hover {
+  transition: 0.2s;
+}
+
+.btn a {
+  text-decoration: none;
+}

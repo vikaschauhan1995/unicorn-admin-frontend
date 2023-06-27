@@ -1,0 +1,35 @@
+@import '__dimen.scss';
+@import '__color.scss';
+
+.Login__container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login__innerContainer {
+  background-color: $bg-grey;
+  padding: $padding-3;
+}
+
+.Login__form_header {
+  display: flex;
+  justify-content: center;
+}
+
+.my-2 {
+  margin-top: 12px;
+  margin-top: 12px;
+}
+
+.Login__form_body {}
+
+.Login__form_footer {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,14 @@
+@import '__dimen';
+
+.Navbar__container {
+  background-color: #f1f1f1;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  max-width: 100% !important;
+}
+
+
+.ml-1 {
+  margin-left: $padding-1 !important;
+}
