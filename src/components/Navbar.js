@@ -13,11 +13,11 @@ const Navbar = () => {
     dispatch(logoutAction());
   }
   return (
-    <header>
-      <div className="container Navbar__container">
-        <Link to="/">
-          <h2>Notes</h2>
-        </Link>
+    <div className="container Navbar__container">
+      <div className="Navbar__heading"><Link to="/">
+        <h2>Unicorn</h2>
+      </Link></div>
+      <div className="Navbar__info">
         <nav>
           {authState?.[USER] && (
             <div>
@@ -27,25 +27,9 @@ const Navbar = () => {
               </button>
             </div>
           )}
-          {
-            !authState?.[USER] && (
-              <div>
-                <button className={`${style.btn}`}>
-                  <Link to="/login">
-                    Login
-                  </Link>
-                </button>
-                <button className={`${style.btn} ml-1`}>
-                  <Link to="/signup">
-                    Signup
-                  </Link>
-                </button>
-              </div>
-            )
-          }
         </nav>
       </div>
-    </header>
+    </div>
   )
 }
 

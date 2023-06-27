@@ -24,7 +24,6 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
         <Routes>
           <Route path="/" element={state[USER] ? <Home /> : <Navigate to="/login" />} />
           <Route path="/login" element={!state[USER] ? <Login /> : <Navigate to="/" />} />

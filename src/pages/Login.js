@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { EMAIL, PASSWORD, AUTH_REDUCER, IS_LOGIN_LOADING, LOGIN_ERROR } from '../redux/Auth/constants';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { loginAction } from '../redux/Auth/actions';
 import style from '../style/Button.module.scss';
 import '../style/Login.scss';
@@ -61,6 +62,9 @@ const Login = () => {
         {authState[LOGIN_ERROR] && <Alert key="danger" variant="danger">
           {authState[LOGIN_ERROR]}
         </Alert>}
+        <Link to="/signup">
+          Signup
+        </Link>
       </div>
     </div>
   )

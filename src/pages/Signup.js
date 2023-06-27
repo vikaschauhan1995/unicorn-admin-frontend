@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { EMAIL, PASSWORD, AUTH_REDUCER, IS_SIGNUP_LOADING, SIGNUP_ERROR } from '../redux/Auth/constants';
 import { signupAction } from '../redux/Auth/actions';
@@ -61,6 +62,9 @@ const Signup = () => {
         {authState[SIGNUP_ERROR] && <Alert key="danger" variant="danger">
           {authState[SIGNUP_ERROR]}
         </Alert>}
+        <Link to="/login">
+          Login
+        </Link>
       </div>
     </div>
   )
