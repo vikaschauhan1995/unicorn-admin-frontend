@@ -36,7 +36,6 @@ const Sidebar = () => {
   const permissions = authState?.[USER].permissions ? authState?.[USER].permissions : [];
   const components = getActiveComponents(permissions);
   const sidebarObjList = makeSidebarList(components);
-  console.log("sidebarObjList", sidebarObjList);
   const sidebarList = sidebarObjList.map(item => {
     return <div><Link to={`/${item.key}`}>{item.title}</Link></div>
   });

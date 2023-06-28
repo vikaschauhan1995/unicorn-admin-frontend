@@ -1,9 +1,10 @@
 import React from 'react'
+import AddSubuserForm from '../components/AddSubuserForm'
 
 const Subuser = () => {
   return (
     <div>
-      Subuser
+      <AddSubuserForm />
     </div>
   )
 }

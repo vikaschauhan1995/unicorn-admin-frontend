@@ -31,7 +31,7 @@ function App() {
           <div className="App__container">
             <BrowserRouter>
               <Navbar />
-              <div className="App__root_container" style={{ backgroundColor: "red" }}>
+              <div className="App__root_container">
                 <div className="App__sidebar">
                   <Sidebar />
                 </div>
