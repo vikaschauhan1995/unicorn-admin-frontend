@@ -1,25 +1,2 @@
 @import '__dimen.scss';
 @import '__color.scss';
-
-.Home__container {
-  min-height: 100vh;
-  // border: 1px solid blue;
-  display: flex;
-  flex-direction: column;
-}
-
-.Home__root_container {
-  flex: 1;
-  display: flex;
-  // border: 2px solid green;
-}
-
-.Home__body {
-  flex: 1;
-  // border: 1px solid red;
-}
-
-.Home__sidebar {
-  width: 200px;
-  background-color: aqua;
-}

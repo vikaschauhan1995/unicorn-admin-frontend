@@ -37,3 +37,27 @@
     transform: rotate(360deg);
   }
 }
+
+
+.App__container {
+  min-height: 100vh;
+  // border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+}
+
+.App__root_container {
+  flex: 1;
+  display: flex;
+  // border: 2px solid green;
+}
+
+.App__body {
+  flex: 1;
+  // border: 1px solid red;
+}
+
+.App__sidebar {
+  width: 200px;
+  background-color: aqua;
+}

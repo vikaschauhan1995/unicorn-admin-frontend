@@ -1,5 +1,5 @@
 
-import './App.css';
+import './App.scss';
 import {
   BrowserRouter, Routes, Route, Redirect, Navigate
 } from 'react-router-dom';
@@ -28,14 +28,14 @@ function App() {
     <div className="App">
       {
         state[USER] ?
-          <div className="Home__container">
+          <div className="App__container">
             <BrowserRouter>
               <Navbar />
-              <div className="Home__root_container" style={{ backgroundColor: "red" }}>
-                <div className="Home__sidebar">
+              <div className="App__root_container" style={{ backgroundColor: "red" }}>
+                <div className="App__sidebar">
                   <Sidebar />
                 </div>
-                <div className="Home__body">
+                <div className="App__body">
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route exact path="/order" element={<Order />} />
