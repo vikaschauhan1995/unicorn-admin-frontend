@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../style/Home.scss';
 import Sidebar from '../components/Sidebar';
-// import Offcanvas from 'react-bootstrap/Offcanvas';
 import Navbar from '../components/Navbar';
+import Dashboard from './Dashboard';
 
 const Home = () => {
-  // const [show, setShow] = useState(false);
-
-  // const handleClose = () => setShow(false);
-  // const toggleShow = () => setShow((s) => !s);
   return (
     <div className="Home__container">
       <Navbar />
