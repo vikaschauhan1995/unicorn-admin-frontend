@@ -7,13 +7,7 @@ import Dashboard from './Dashboard';
 const Home = () => {
   return (
     <div className="Home__container">
-      <Navbar />
-      <div className="Home__root_container" style={{ backgroundColor: "red" }}>
-        <div className="Home__sidebar">
-          <Sidebar />
-        </div>
-        <div className="Home__body">Home Body</div>
-      </div>
+      Home
     </div>
   )
 }
