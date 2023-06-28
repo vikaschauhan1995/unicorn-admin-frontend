@@ -7,3 +7,4 @@ export function getAllPermissionsAction() {
     type: GET_ALL_PERMISSIONS_ACTION
   }
 }
+
