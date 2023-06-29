@@ -26,7 +26,7 @@ const Sidebar = () => {
   const components = getActiveComponents(permissions);
   const sidebarObjList = makeSidebarList(components);
   const sidebarList = sidebarObjList.map(item => {
-    return <div><Link to={`/${item.key}`}>{item.title}</Link></div>
+    return <div key={item.key}><Link to={`/${item.key}`}>{item.title}</Link></div>
   });
   return (
     <div>

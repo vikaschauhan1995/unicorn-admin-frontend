@@ -21,3 +21,6 @@ export const USER_TYPE = 'user_type';
 export const ADD_SUB_USER_ACTION = 'addSubUserAction';
 export const GET_ALL_SUB_USERS_ACTION = 'getAllSubuserAction';
 export const DELETE_SUBUSER_ACTION = 'deleteSubuserAction';
+
+
+export const SUBUSER_FULL_ACCESS = 'sub_user_full_access';

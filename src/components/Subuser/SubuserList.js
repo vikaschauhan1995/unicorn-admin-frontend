@@ -4,9 +4,11 @@ import Card from 'react-bootstrap/Card';
 import '../../style/SubuserList.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteSubuserAction, getAllSubusersAction } from '../../redux/Subuser/actions';
-import { SUBUSER_LIST, SUBUSER_REDUCER, SUBUSER_DELETE_LOADING } from '../../redux/Subuser/constants';
+import { SUBUSER_LIST, SUBUSER_REDUCER, SUBUSER_DELETE_LOADING, SUBUSER_FULL_ACCESS } from '../../redux/Subuser/constants';
 import { AUTH_REDUCER, USER } from '../../redux/Auth/constants';
 import style from '../../style/Button.module.scss';
+import isSubuserAccessible from '../../utils/isSubuserAccessible';
+import { PERMISSIONS } from '../../redux/Permission/constants';
 
 const SubuserList = () => {
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ const SubuserList = () => {
   const subuserReducerState = state?.[SUBUSER_REDUCER];
   const authReducerState = state?.[AUTH_REDUCER];
   const subusers = subuserReducerState?.[SUBUSER_LIST];
+  const isAccessible = isSubuserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions);
   const clickDeleteButton = (subuser) => {
     dispatch(deleteSubuserAction(subuser));
     // console.log("subuser=>", subuser);
@@ -26,19 +29,19 @@ const SubuserList = () => {
       return <Card key={subuser?._id}>
         <Card.Title>{subuser?.email}</Card.Title>
         <div>
-          <button className={style.btn} disabled={subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id} onClick={() => clickDeleteButton(subuser)}>{subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id ? 'Loading' : 'Delete'}</button>
+          {isAccessible ? <button className={style.btn} disabled={subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id} onClick={() => clickDeleteButton(subuser)}>{subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id ? 'Loading' : 'Delete'}</button> : null}
         </div>
       </Card>
     });
     return l;
   }
-  // console.log("subuserReducerState=>", subuserReducerState);
+  // console.log("isAccessible=>", isAccessible);
   useEffect(() => {
     dispatch(getAllSubusersAction(authReducerState?.[USER]?._id));
   }, [dispatch, authReducerState]);
   return (
     <div>
-      subuser list
+      <strong>Sub-User List</strong>
       {list()}
     </div>
   )
