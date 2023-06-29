@@ -88,6 +88,7 @@ const AddSubuserForm = () => {
         </Form.Control>
         <button className={style.btn} disabled={subuserReducerState?.[IS_SAVE_SUBUSER_LOADING]}>Submit</button>
       </form>
+      *Sub-user can not be edited, but can be deleted with its given permissions
       {subuserReducerState[IS_SAVE_SUBUSER_ERROR] && <Alert key="danger" variant="danger">
         {subuserReducerState[IS_SAVE_SUBUSER_ERROR]}
       </Alert>}
