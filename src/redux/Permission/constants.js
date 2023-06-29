@@ -18,3 +18,5 @@ export const GET_ALL_PERMISSIONS_ACTION = 'getAllPermissionsAction';
 
 export const SET_ALL_PERMISSIONS = 'setAllPermissions'
 export const SET_PERMISSION_LIST_ERROR = 'setPermissionListError'
+
+export const PERMISSIONS = 'permissions';

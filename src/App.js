@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { AUTH_REDUCER, USER } from './redux/Auth/constants';
 import { setUser } from './redux/Auth/actions';
 import Sidebar from './components/Sidebar';
+import PermissionWrapper from './wrappers/PermissionWrapper';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,14 +37,16 @@ function App() {
                   <Sidebar />
                 </div>
                 <div className="App__body">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route exact path="/order" element={<Order />} />
-                    <Route exact path="/subuser" element={<Subuser />} />
-                    <Route exact path="/login" element={<Navigate to="/" />} />
-                    <Route exact path="/signup" element={<Navigate to="/" />} />
-                    <Route path="*" element={<Home />} />
-                  </Routes>
+                  <PermissionWrapper>
+                    <Routes>
+                      <Route exact path="/" element={<Home />} />
+                      <Route exact path="/order" element={<Order />} />
+                      <Route exact path="/subuser" element={<Subuser />} />
+                      <Route exact path="/login" element={<Navigate to="/" />} />
+                      <Route exact path="/signup" element={<Navigate to="/" />} />
+                      <Route path="*" element={<Home />} />
+                    </Routes>
+                  </PermissionWrapper>
                 </div>
               </div>
             </BrowserRouter>
