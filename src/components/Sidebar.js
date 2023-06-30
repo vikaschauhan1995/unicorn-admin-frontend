@@ -6,9 +6,9 @@ import getActiveComponents from '../utils/getActiveComponents';
 
 const ORDER_PAGE_OBJ = { key: 'order', title: 'Orders' };
 const SUB_USER_PAGE_OBJ = { key: 'subuser', title: 'Sub-Users' };
-const HISTORY_PAGE_OBJ = { key: 'history', title: 'History' }
+const PRODUCT_PAGE_OBJ = { key: 'product', title: 'Products' };
 
-const page_objs = [ORDER_PAGE_OBJ, SUB_USER_PAGE_OBJ, HISTORY_PAGE_OBJ];
+const page_objs = [ORDER_PAGE_OBJ, SUB_USER_PAGE_OBJ, PRODUCT_PAGE_OBJ];
 
 const makeSidebarList = (componentsArray) => {
   const provideTitleToPage = page_objs.filter(item => {

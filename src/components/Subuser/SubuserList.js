@@ -25,9 +25,23 @@ const SubuserList = () => {
     if (!subusers?.length) {
       return <div>No Sub-users</div>
     }
+    const permissionsList = (array) => {
+      if (!array?.length) {
+        return "No Permissions";
+      }
+      let permissionsString = "";
+      array.forEach((permission, index) => {
+        permissionsString += permission?.key;
+        if (!(array.length <= 1) && index !== array.length - 1) {
+          permissionsString += ", ";
+        }
+      });
+      return permissionsString;
+    }
     const l = subusers?.map(subuser => {
       return <Card key={subuser?._id}>
         <Card.Title>{subuser?.email}</Card.Title>
+        <Card.Text>{permissionsList(subuser?.[PERMISSIONS]?.[0]?.permissions)}</Card.Text>
         <div>
           {isAccessible ? <button className={style.btn} disabled={subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id} onClick={() => clickDeleteButton(subuser)}>{subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id ? 'Loading' : 'Delete'}</button> : null}
         </div>
@@ -35,7 +49,7 @@ const SubuserList = () => {
     });
     return l;
   }
-  // console.log("isAccessible=>", isAccessible);
+  // console.log("subuserReducerState=>", subuserReducerState);
   useEffect(() => {
     dispatch(getAllSubusersAction(authReducerState?.[USER]?._id));
   }, [dispatch, authReducerState]);
