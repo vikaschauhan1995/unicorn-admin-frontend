@@ -15,6 +15,8 @@ export const PRODUCT_MODIFIED_LAST = 'modified_last';
 export const SET_PRODUCT_FORM_VISIBILITY_ACTION = 'set_product_form_visibility_action';
 export const SET_PRODUCT_FORM_DATA_ACTION = 'set_product_form_data_action';
 export const SAVE_PRODUCT_DATA_ACTION = 'save_product_data_action';
+export const GET_PRODUCT_LIST_ACTION = 'get_product_list_action';
+export const MAKE_PRODUCT_FORM_DATA_EMPTY = 'make_product_form_data_empty';
 
 // Reducer keys
 export const IS_PRODUCT_FORM_VISIBLE = 'is_product_form_visible';
@@ -24,8 +26,13 @@ export const IS_SAVING_FORM_DATA = 'is_sending_form_data';
 export const SET_SAVE_PRODUCT_DATA_ERROR = 'set_save_product_data_error';
 export const SAVE_PRODUCT_DATA_ERROR = 'save_product_data_error';
 export const SET_PRODUCT_LIST = 'set_product_list';
+export const SET_PRODUCT_LIST_ERROR = 'set_product_list_error';
+export const PRODUCT_LIST_ERROR = 'product_list_error';
 export const PRODUCT_LIST = 'product_list';
 export const ADD_PRODUCT_IN_PRODUCT_LIST = 'add_product_in_product_list';
+export const IS_PRODUCT_LIST_LOADING = 'is_product_list_loading';
+export const SET_IS_PRODUCT_LIST_LOADING = 'set_is_product_list_loading';
+
 
 // errors keys
 export const PRODUCT_NAME_ERROR = 'name_error';

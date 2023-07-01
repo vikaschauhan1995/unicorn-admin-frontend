@@ -1,4 +1,4 @@
-import { IS_PRODUCT_FORM_VISIBLE, SET_PRODUCT_FORM_VISIBILITY_ACTION, PRODUCT_FORM_DATA, PRODUCT_NAME, PRODUCT_SKU, SET_PRODUCT_FORM_DATA_ACTION, IS_SAVING_FORM_DATA, SET_IS_SAVING_FORM_DATA, SET_SAVE_PRODUCT_DATA_ERROR, SAVE_PRODUCT_DATA_ERROR, SET_PRODUCT_LIST, PRODUCT_LIST, ADD_PRODUCT_IN_PRODUCT_LIST } from "./constants";
+import { IS_PRODUCT_FORM_VISIBLE, SET_PRODUCT_FORM_VISIBILITY_ACTION, PRODUCT_FORM_DATA, PRODUCT_NAME, PRODUCT_SKU, SET_PRODUCT_FORM_DATA_ACTION, IS_SAVING_FORM_DATA, SET_IS_SAVING_FORM_DATA, SET_SAVE_PRODUCT_DATA_ERROR, SAVE_PRODUCT_DATA_ERROR, SET_PRODUCT_LIST, PRODUCT_LIST, ADD_PRODUCT_IN_PRODUCT_LIST, PRODUCT_LIST_ERROR, SET_PRODUCT_LIST_ERROR, SET_IS_PRODUCT_LIST_LOADING, IS_PRODUCT_LIST_LOADING, MAKE_PRODUCT_FORM_DATA_EMPTY } from "./constants";
 
 
 const initialState = {
@@ -9,7 +9,8 @@ const initialState = {
   },
   [IS_SAVING_FORM_DATA]: false,
   [SAVE_PRODUCT_DATA_ERROR]: null,
-  [PRODUCT_LIST]: []
+  [PRODUCT_LIST]: [],
+  [PRODUCT_LIST_ERROR]: false
 };
 
 
@@ -26,12 +27,27 @@ export const reducer = (state = initialState, action) => {
           [key]: value
         }
       };
+    case MAKE_PRODUCT_FORM_DATA_EMPTY:
+      return {
+        ...state, [PRODUCT_FORM_DATA]: {
+          [PRODUCT_NAME]: '',
+          [PRODUCT_SKU]: ''
+        },
+      }
     case SET_IS_SAVING_FORM_DATA:
       return { ...state, [IS_SAVING_FORM_DATA]: action.payload };
     case SET_SAVE_PRODUCT_DATA_ERROR:
       return { ...state, [SAVE_PRODUCT_DATA_ERROR]: action.payload };
+    case SET_IS_PRODUCT_LIST_LOADING:
+      return { ...state, [IS_PRODUCT_LIST_LOADING]: action.payload };
+    case SET_PRODUCT_LIST_ERROR:
+      return { ...state, [PRODUCT_LIST_ERROR]: action.payload };
     case SET_PRODUCT_LIST:
       return { ...state, [PRODUCT_LIST]: action.payload };
+    case ADD_PRODUCT_IN_PRODUCT_LIST:
+      const list = [...state[PRODUCT_LIST]];
+      list.unshift(action.payload);
+      return { ...state, [PRODUCT_LIST]: list };
     default:
       return state;
   }

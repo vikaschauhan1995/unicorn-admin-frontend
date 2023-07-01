@@ -5,11 +5,11 @@ import ProductForm from '../components/Product/ProductForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { PRODUCT_REDUCER, PRODUCT_LIST } from '../redux/Product/constants';
 import { setProductFormVisibilityAction } from '../redux/Product/actions';
+import ProductListTable from '../components/Product/ProductListTable';
 
 const Product = () => {
   const dispatch = useDispatch();
-  const productReducerState = useSelector(state => state[PRODUCT_REDUCER]);
-  console.log("productReducerState LIST=>", productReducerState?.[PRODUCT_LIST]);
+
   return (
     <div className="Product__container">
       <div className="Product__head mx-3">
@@ -19,7 +19,7 @@ const Product = () => {
         </div>
       </div>
       <div className="Product__body mx-3">
-        Product list goes here...
+        <ProductListTable />
       </div>
       <ProductForm />
     </div>
