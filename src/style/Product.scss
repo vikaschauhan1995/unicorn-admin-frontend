@@ -1,0 +1,12 @@
+@import '__dimen.scss';
+@import '__color.scss';
+
+
+.Product__container {
+  // display: flex;
+}
+
+.Product__head {
+  display: flex;
+  justify-content: space-between;
+}

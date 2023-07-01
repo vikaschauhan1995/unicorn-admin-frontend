@@ -15,6 +15,7 @@ import { AUTH_REDUCER, USER } from './redux/Auth/constants';
 import { setUser } from './redux/Auth/actions';
 import Sidebar from './components/Sidebar';
 import PermissionWrapper from './wrappers/PermissionWrapper';
+import Product from './pages/Product';
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
                       <Route exact path="/" element={<Home />} />
                       <Route exact path="/order" element={<Order />} />
                       <Route exact path="/subuser" element={<Subuser />} />
+                      <Route exact path="/product" element={<Product />} />
                       <Route exact path="/login" element={<Navigate to="/" />} />
                       <Route exact path="/signup" element={<Navigate to="/" />} />
                       <Route path="*" element={<Home />} />

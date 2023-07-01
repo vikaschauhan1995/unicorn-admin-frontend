@@ -5,9 +5,12 @@ import { SUBUSER_REDUCER } from "./Subuser/constants";
 import { reducer as subuserReducer } from "./Subuser/reducer";
 import { PERMISSION_REDUCER } from './Permission/constants';
 import { reducer as permissionReducer } from './Permission/reducer';
+import { PRODUCT_REDUCER } from "./Product/constants";
+import { reducer as productReducer } from "./Product/reducer";
 
 export default combineReducers({
   [AUTH_REDUCER]: authReducer,
   [SUBUSER_REDUCER]: subuserReducer,
-  [PERMISSION_REDUCER]: permissionReducer
+  [PERMISSION_REDUCER]: permissionReducer,
+  [PRODUCT_REDUCER]: productReducer
 });

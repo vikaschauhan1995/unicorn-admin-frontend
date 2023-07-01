@@ -4,6 +4,7 @@ import createSagaMiddleware from '@redux-saga/core';
 import authSaga from './Auth/saga';
 import subuserSaga from './Subuser/saga';
 import permissionSaga from './Permission/saga';
+import productSaga from './Product/saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -17,3 +18,4 @@ export default configureStore({
 sagaMiddleware.run(authSaga);
 sagaMiddleware.run(subuserSaga);
 sagaMiddleware.run(permissionSaga);
+sagaMiddleware.run(productSaga);
