@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap';
 import Alert from 'react-bootstrap/Alert';
+import Button from '@mui/material/Button';
 import '../style/AddSubuserForm.scss';
 import style from '../style/Button.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +27,7 @@ const AddSubuserForm = () => {
   const permissionReducerState = useSelector(state => state[PERMISSION_REDUCER]);
   const subuserReducerState = useSelector(state => state[SUBUSER_REDUCER])
   const permissionList = permissionReducerState?.[PERMISSION_LIST];
-  const isAccessible = isUserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions);
+  const isAccessible = isUserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions, authReducerState?.[USER]?.[USER_TYPE]);
   const getPermissionObjFromKey = (objs, keys) => {
     if (objs?.length === 0 || keys?.length === 0) {
       return [];
@@ -92,7 +93,7 @@ const AddSubuserForm = () => {
         <Form.Control as="select" multiple onChange={e => setField([].slice.call(e.target.selectedOptions).map(item => item.value))}>
           {optionsListCreated()}
         </Form.Control>
-        <button className={style.btn} disabled={isAccessible ? subuserReducerState?.[IS_SAVE_SUBUSER_LOADING] : true}>Submit</button>
+        <Button variant="contained" className={style.btn} disabled={isAccessible ? subuserReducerState?.[IS_SAVE_SUBUSER_LOADING] : true}>Submit</Button>
       </form>
       *Sub-user can not be edited, but can be deleted with its given permissions
       {subuserReducerState[IS_SAVE_SUBUSER_ERROR] && <Alert key="danger" variant="danger">

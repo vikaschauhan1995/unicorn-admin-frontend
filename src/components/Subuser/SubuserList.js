@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
-// import Button from 'react-bootstrap/Button';
+import Button from '@mui/material/Button';
 import '../../style/SubuserList.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteSubuserAction, getAllSubusersAction } from '../../redux/Subuser/actions';
-import { SUBUSER_LIST, SUBUSER_REDUCER, SUBUSER_DELETE_LOADING, SUBUSER_FULL_ACCESS } from '../../redux/Subuser/constants';
+import { SUBUSER_LIST, SUBUSER_REDUCER, SUBUSER_DELETE_LOADING, SUBUSER_FULL_ACCESS, USER_TYPE } from '../../redux/Subuser/constants';
 import { AUTH_REDUCER, USER } from '../../redux/Auth/constants';
 import style from '../../style/Button.module.scss';
 import isUserAccessible from '../../utils/isUserAccessible';
@@ -16,7 +16,7 @@ const SubuserList = () => {
   const subuserReducerState = state?.[SUBUSER_REDUCER];
   const authReducerState = state?.[AUTH_REDUCER];
   const subusers = subuserReducerState?.[SUBUSER_LIST];
-  const isAccessible = isUserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions);
+  const isAccessible = isUserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions, authReducerState?.[USER]?.[USER_TYPE]);
   const clickDeleteButton = (subuser) => {
     dispatch(deleteSubuserAction(subuser));
     // console.log("subuser=>", subuser);
@@ -43,7 +43,7 @@ const SubuserList = () => {
         <Card.Title>{subuser?.email}</Card.Title>
         <Card.Text>{permissionsList(subuser?.[PERMISSIONS]?.[0]?.permissions)}</Card.Text>
         <div>
-          {isAccessible ? <button className={style.btn} disabled={subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id} onClick={() => clickDeleteButton(subuser)}>{subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id ? 'Loading' : 'Delete'}</button> : null}
+          <Button variant="contained" color="error" className={style.btn} disabled={!isAccessible ? true : subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id} onClick={() => clickDeleteButton(subuser)}>{subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id ? 'Loading' : 'Delete'}</Button>
         </div>
       </Card>
     });

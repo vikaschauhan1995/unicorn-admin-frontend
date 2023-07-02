@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import Button from '@mui/material/Button';
 import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 import { useDispatch, useSelector } from 'react-redux';
@@ -117,7 +117,7 @@ const ProductForm = () => {
         <Button onClick={clickCloseButton} variant="secondary">
           Close
         </Button>
-        <Button disabled={productReducerState[IS_SAVING_FORM_DATA] || productReducerState[IS_UPDATE_PRODUCT_LOADING]} variant="primary" onClick={isProductSelected ? clickUpdateButton : clickSaveButton}>
+        <Button disabled={productReducerState[IS_SAVING_FORM_DATA] || productReducerState[IS_UPDATE_PRODUCT_LOADING]} variant="contained" onClick={isProductSelected ? clickUpdateButton : clickSaveButton}>
           {isProductSelected ? "Update" : "Save"}
         </Button>
       </Modal.Footer>

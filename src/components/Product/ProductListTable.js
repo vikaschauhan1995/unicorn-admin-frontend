@@ -20,13 +20,14 @@ import ProductDeleteDialogBox from './ProductDeleteDialogBox';
 import { AUTH_REDUCER, USER } from '../../redux/Auth/constants';
 import { PERMISSIONS } from '../../redux/Permission/constants';
 import isUserAccessible from '../../utils/isUserAccessible';
+import { USER_TYPE } from '../../redux/Subuser/constants';
 
 
 export default function ProductListTable() {
   const dispatch = useDispatch();
   const productReducerState = useSelector(state => state[PRODUCT_REDUCER]);
   const authReducerState = useSelector(state => state[AUTH_REDUCER]);
-  const isAccessible = isUserAccessible(PRODUCT_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions);
+  const isAccessible = isUserAccessible(PRODUCT_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions, authReducerState?.[USER]?.[USER_TYPE]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const clickEditButton = (product) => {
