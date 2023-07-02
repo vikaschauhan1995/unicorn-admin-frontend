@@ -2,6 +2,7 @@
 export const PRODUCT_REDUCER = 'productReducer';
 
 // Product form keys
+export const PRODUCT_ID = '_id';
 export const PRODUCT_NAME = 'name';
 export const PRODUCT_SKU = 'sku';
 export const PRODUCT_IMAGES = 'images';
@@ -17,6 +18,9 @@ export const SET_PRODUCT_FORM_DATA_ACTION = 'set_product_form_data_action';
 export const SAVE_PRODUCT_DATA_ACTION = 'save_product_data_action';
 export const GET_PRODUCT_LIST_ACTION = 'get_product_list_action';
 export const MAKE_PRODUCT_FORM_DATA_EMPTY = 'make_product_form_data_empty';
+export const SET_PRODUCT_IN_PRODUCT_FORM_ACTION = 'set_product_in_product_form_action';
+export const REMOVE_PRODUCT_FORM_ERROR_ACTION = 'remove_product_form_error_action';
+export const UPDATE_PRODUCT_ACTION = 'update_product_action';
 
 // Reducer keys
 export const IS_PRODUCT_FORM_VISIBLE = 'is_product_form_visible';
@@ -32,7 +36,18 @@ export const PRODUCT_LIST = 'product_list';
 export const ADD_PRODUCT_IN_PRODUCT_LIST = 'add_product_in_product_list';
 export const IS_PRODUCT_LIST_LOADING = 'is_product_list_loading';
 export const SET_IS_PRODUCT_LIST_LOADING = 'set_is_product_list_loading';
-
+export const SET_IS_UPDATE_PRODUCT_LOADING = 'set_is_update_product_loading';
+export const IS_UPDATE_PRODUCT_LOADING = 'is_update_product_loading';
+export const UPDATE_A_PRODUCT_FROM_PRODUCT_LIST = 'set_update_product_from_product_list';
+export const SET_UPDATE_PRODUCT_ERROR = 'set_update_product_error';
+export const UPDATE_PRODUCT_ERROR = 'update_product_error';
+export const SET_SELECTED_PRODUCT_FOR_DELETING_ACTION = 'set_selected_product_for_deleting_action';
+export const SELECTED_PRODUCT_FOR_DELETING = 'selected_product_for_deleting';
+export const REMOVE_SELECTED_PRODUCT_FOR_DELETING_ACTION = 'remove_selected_product_for_deleting_action';
+export const DELETE_PRODUCT_ACTION = 'delete_product_action';
+export const SET_PRODUCT_DELETING = 'set_product_deleting';
+export const IS_PRODUCT_DELETING = 'is_product_de';
+export const REMOVE_DELETED_PRODUCT_FROM_PRODUCT_LIST = 'remove_deleted_product_from_product_list';
 
 // errors keys
 export const PRODUCT_NAME_ERROR = 'name_error';
