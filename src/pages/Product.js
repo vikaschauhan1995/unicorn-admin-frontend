@@ -15,6 +15,7 @@ const Product = () => {
   const dispatch = useDispatch();
   const authReducerState = useSelector(state => state[AUTH_REDUCER]);
   const isAccessible = isUserAccessible(PRODUCT_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions, authReducerState?.[USER]?.[USER_TYPE]);
+  console.log("authReducerState?.[USER]?.[USER_TYPE]", authReducerState?.[USER]?.[USER_TYPE]);
   return (
     <div className="Product__container">
       <div className="Product__head mx-3">

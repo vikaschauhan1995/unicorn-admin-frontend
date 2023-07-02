@@ -16,6 +16,8 @@ import { setUser } from './redux/Auth/actions';
 import Sidebar from './components/Sidebar';
 import PermissionWrapper from './wrappers/PermissionWrapper';
 import Product from './pages/Product';
+import Inventory from './pages/Inventory';
+import { USER_TYPE } from './redux/Subuser/constants';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,12 +40,13 @@ function App() {
                   <Sidebar />
                 </div>
                 <div className="App__body">
-                  <PermissionWrapper>
+                  <PermissionWrapper user_type={state?.[USER]?.[USER_TYPE]}>
                     <Routes>
                       <Route exact path="/" element={<Home />} />
                       <Route exact path="/order" element={<Order />} />
                       <Route exact path="/subuser" element={<Subuser />} />
                       <Route exact path="/product" element={<Product />} />
+                      <Route exact path="/inventory" element={<Inventory />} />
                       <Route exact path="/login" element={<Navigate to="/" />} />
                       <Route exact path="/signup" element={<Navigate to="/" />} />
                       <Route path="*" element={<Home />} />

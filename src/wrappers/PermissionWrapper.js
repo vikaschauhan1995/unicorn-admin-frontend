@@ -6,15 +6,15 @@ import { PERMISSIONS } from '../redux/Permission/constants';
 import getActiveComponents from '../utils/getActiveComponents';
 import isRouteAccessible from '../utils/isRouteAccessible';
 
-const PermissionWrapper = ({ children }) => {
+const PermissionWrapper = ({ user_type, children }) => {
   const location = useLocation();
   const authReducerState = useSelector(state => state);
 
   const allPermissionObjects = authReducerState?.[AUTH_REDUCER]?.[USER]?.[PERMISSIONS];
   const allActiveComponents = getActiveComponents(allPermissionObjects);
   allActiveComponents.push("");
-  const isAccessible = isRouteAccessible(location.pathname, allActiveComponents);
-  // console.log("allActiveComponents=>", allActiveComponents)
+  const isAccessible = isRouteAccessible(location.pathname, allActiveComponents, user_type);
+  // console.log("user_type=>", user_type)
   if (isAccessible) {
     return (
       <>

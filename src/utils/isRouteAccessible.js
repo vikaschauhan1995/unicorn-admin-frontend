@@ -1,7 +1,10 @@
 
 
 
-const isRouteAccessible = (route, permissions) => {
+const isRouteAccessible = (route, permissions, user_type) => {
+  if (user_type === "root") {
+    return true;
+  }
   var isAccessible = false;
   if (!permissions || permissions?.length === 0) {
     return false;
