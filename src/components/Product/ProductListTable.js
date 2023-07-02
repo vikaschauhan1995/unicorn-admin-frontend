@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProductAction, getProductListAction, removeSelectedProductForDeletingAction, setProductFormVisibilityAction, setProductInProductFormAction, setSelectedProductForDeleting } from '../../redux/Product/actions';
-import { PRODUCT_LIST, PRODUCT_NAME, PRODUCT_REDUCER, PRODUCT_SKU, PRODUCT_CREATED_BY_EMAIL, PRODUCT_CREATED_AT, PRODUCT_MODIFIED_LAST, IS_PRODUCT_LIST_LOADING, SELECTED_PRODUCT_FOR_DELETING, PRODUCT_ID, IS_PRODUCT_DELETING } from '../../redux/Product/constants';
+import { PRODUCT_LIST, PRODUCT_NAME, PRODUCT_REDUCER, PRODUCT_SKU, PRODUCT_CREATED_BY_EMAIL, PRODUCT_CREATED_AT, PRODUCT_MODIFIED_LAST, IS_PRODUCT_LIST_LOADING, SELECTED_PRODUCT_FOR_DELETING, PRODUCT_ID, IS_PRODUCT_DELETING, PRODUCT_FULL_ACCESS } from '../../redux/Product/constants';
 import formatDistance from 'date-fns/formatDistanceToNowStrict';
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,11 +17,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ProductDeleteDialogBox from './ProductDeleteDialogBox';
+import { AUTH_REDUCER, USER } from '../../redux/Auth/constants';
+import { PERMISSIONS } from '../../redux/Permission/constants';
+import isUserAccessible from '../../utils/isUserAccessible';
 
 
 export default function ProductListTable() {
   const dispatch = useDispatch();
   const productReducerState = useSelector(state => state[PRODUCT_REDUCER]);
+  const authReducerState = useSelector(state => state[AUTH_REDUCER]);
+  const isAccessible = isUserAccessible(PRODUCT_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const clickEditButton = (product) => {
@@ -66,10 +71,10 @@ export default function ProductListTable() {
         // console.log("obj=>", obj);
         return (<>
           <ButtonGroup variant="text" aria-label="text button group">
-            <Button onClick={() => clickEditButton(obj)}>
+            <Button disabled={isAccessible ? false : true} onClick={() => clickEditButton(obj)}>
               <FontAwesomeIcon icon={faEdit} />
             </Button>
-            <Button onClick={() => clickDeleteButton(obj)}>
+            <Button disabled={isAccessible ? false : true} onClick={() => clickDeleteButton(obj)}>
               <FontAwesomeIcon icon={faTrash} />
             </Button>
           </ButtonGroup>

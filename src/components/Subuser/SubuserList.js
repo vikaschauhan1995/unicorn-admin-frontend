@@ -7,7 +7,7 @@ import { deleteSubuserAction, getAllSubusersAction } from '../../redux/Subuser/a
 import { SUBUSER_LIST, SUBUSER_REDUCER, SUBUSER_DELETE_LOADING, SUBUSER_FULL_ACCESS } from '../../redux/Subuser/constants';
 import { AUTH_REDUCER, USER } from '../../redux/Auth/constants';
 import style from '../../style/Button.module.scss';
-import isSubuserAccessible from '../../utils/isSubuserAccessible';
+import isUserAccessible from '../../utils/isUserAccessible';
 import { PERMISSIONS } from '../../redux/Permission/constants';
 
 const SubuserList = () => {
@@ -16,7 +16,7 @@ const SubuserList = () => {
   const subuserReducerState = state?.[SUBUSER_REDUCER];
   const authReducerState = state?.[AUTH_REDUCER];
   const subusers = subuserReducerState?.[SUBUSER_LIST];
-  const isAccessible = isSubuserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions);
+  const isAccessible = isUserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions);
   const clickDeleteButton = (subuser) => {
     dispatch(deleteSubuserAction(subuser));
     // console.log("subuser=>", subuser);
@@ -27,7 +27,7 @@ const SubuserList = () => {
     }
     const permissionsList = (array) => {
       if (!array?.length) {
-        return "No Permissions";
+        return "You can't see the permissions of subusers";
       }
       let permissionsString = "";
       array.forEach((permission, index) => {

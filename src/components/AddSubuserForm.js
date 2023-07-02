@@ -8,7 +8,7 @@ import { addSubUserAction } from '../redux/Subuser/actions';
 import { PERMISSION_REDUCER, PERMISSION_LIST, PERMISSION_OBJ_KEY_KEY, PERMISSIONS } from '../redux/Permission/constants';
 import { SUBUSER_REDUCER, USER_TYPE, IS_SAVE_SUBUSER_LOADING, IS_SAVE_SUBUSER_ERROR, SUBUSER_FULL_ACCESS } from '../redux/Subuser/constants';
 import { getAllPermissionsAction } from '../redux/Permission/actions';
-import isSubuserAccessible from '../utils/isSubuserAccessible';
+import isUserAccessible from '../utils/isUserAccessible';
 import { AUTH_REDUCER, USER } from '../redux/Auth/constants';
 
 const EMAIL = 'email';
@@ -26,7 +26,7 @@ const AddSubuserForm = () => {
   const permissionReducerState = useSelector(state => state[PERMISSION_REDUCER]);
   const subuserReducerState = useSelector(state => state[SUBUSER_REDUCER])
   const permissionList = permissionReducerState?.[PERMISSION_LIST];
-  const isAccessible = isSubuserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions);
+  const isAccessible = isUserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions);
   const getPermissionObjFromKey = (objs, keys) => {
     if (objs?.length === 0 || keys?.length === 0) {
       return [];
@@ -74,33 +74,32 @@ const AddSubuserForm = () => {
     dispatch(getAllPermissionsAction());
   }, [dispatch]);
   // console.log("isAccessible=>", isAccessible);
-  if (isAccessible) {
-    return (
-      <div>
-        <strong>Sub-User Form</strong>
-        <form onSubmit={submitForm}>
-          <label>Email:</label>
-          <Form.Control
-            type="email" name="email" onChange={handleChange} value={state[EMAIL]}
-            placeholder="enter email as Sub-User"
-          />
-          <label>Password:</label>
-          <Form.Control
-            type="password" name="password" onChange={handleChange} value={state[PASSWORD]}
-            placeholder="********"
-          />
-          <Form.Control as="select" multiple onChange={e => setField([].slice.call(e.target.selectedOptions).map(item => item.value))}>
-            {optionsListCreated()}
-          </Form.Control>
-          <button className={style.btn} disabled={subuserReducerState?.[IS_SAVE_SUBUSER_LOADING]}>Submit</button>
-        </form>
-        *Sub-user can not be edited, but can be deleted with its given permissions
-        {subuserReducerState[IS_SAVE_SUBUSER_ERROR] && <Alert key="danger" variant="danger">
-          {subuserReducerState[IS_SAVE_SUBUSER_ERROR]}
-        </Alert>}
-      </div>
-    )
-  }
+
+  return (
+    <div>
+      <strong>Sub-User Form</strong>
+      <form onSubmit={submitForm}>
+        <label>Email:</label>
+        <Form.Control
+          type="email" name="email" onChange={handleChange} value={state[EMAIL]}
+          placeholder="enter email as Sub-User"
+        />
+        <label>Password:</label>
+        <Form.Control
+          type="password" name="password" onChange={handleChange} value={state[PASSWORD]}
+          placeholder="********"
+        />
+        <Form.Control as="select" multiple onChange={e => setField([].slice.call(e.target.selectedOptions).map(item => item.value))}>
+          {optionsListCreated()}
+        </Form.Control>
+        <button className={style.btn} disabled={isAccessible ? subuserReducerState?.[IS_SAVE_SUBUSER_LOADING] : true}>Submit</button>
+      </form>
+      *Sub-user can not be edited, but can be deleted with its given permissions
+      {subuserReducerState[IS_SAVE_SUBUSER_ERROR] && <Alert key="danger" variant="danger">
+        {subuserReducerState[IS_SAVE_SUBUSER_ERROR]}
+      </Alert>}
+    </div>
+  );
 }
 
 export default AddSubuserForm;

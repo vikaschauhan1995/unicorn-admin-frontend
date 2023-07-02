@@ -52,3 +52,6 @@ export const REMOVE_DELETED_PRODUCT_FROM_PRODUCT_LIST = 'remove_deleted_product_
 // errors keys
 export const PRODUCT_NAME_ERROR = 'name_error';
 export const PRODUCT_SKU_ERROR = 'sku_error';
+
+
+export const PRODUCT_FULL_ACCESS = 'product_full_permission';
