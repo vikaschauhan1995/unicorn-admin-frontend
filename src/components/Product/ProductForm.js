@@ -5,7 +5,7 @@ import Alert from 'react-bootstrap/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   IS_PRODUCT_FORM_VISIBLE, PRODUCT_FORM_DATA, PRODUCT_NAME, PRODUCT_REDUCER, PRODUCT_SKU, PRODUCT_NAME_ERROR,
-  PRODUCT_SKU_ERROR,
+  PRODUCT_SKU_ERROR, PRODUCT_QUANTITY_ERROR, PRODUCT_QUANTITY,
   PRODUCT_IMAGES,
   PRODUCT_CREATED_BY_ID,
   PRODUCT_CREATED_BY_EMAIL,
@@ -26,6 +26,7 @@ const ProductForm = () => {
   const [formStateError, setFormStateError] = useState({
     [PRODUCT_NAME_ERROR]: false,
     [PRODUCT_SKU_ERROR]: false,
+    [PRODUCT_QUANTITY_ERROR]: false
   });
   const handleFieldChange = (event) => {
     const value = event.target.value;
@@ -42,9 +43,26 @@ const ProductForm = () => {
       });
     }
   }
+  const handleNumberFieldChange = (event) => {
+    const value = event.target.value;
+    const key = event.target.name;
+    // console.log("quantity", value, key);
+    if (value <= 0) {
+      dispatch(setProductFormDataAction(key, value));
+      setFormStateError(oldState => {
+        return { ...oldState, [key + '_error']: true }
+      });
+    } else {
+      dispatch(setProductFormDataAction(key, value));
+      setFormStateError(oldState => {
+        return { ...oldState, [key + '_error']: false }
+      });
+    }
+  }
   const productName = productReducerState?.[PRODUCT_FORM_DATA]?.[PRODUCT_NAME];
   const productSKU = productReducerState?.[PRODUCT_FORM_DATA]?.[PRODUCT_SKU];
-  // console.log("productReducerState=>", productReducerState);
+  const productQuantity = productReducerState?.[PRODUCT_FORM_DATA]?.[PRODUCT_QUANTITY];
+  // console.log("formStateError=>", formStateError);
   const checkFieldsValidation = () => {
     if (!productName.length) {
       setFormStateError(oldState => {
@@ -56,13 +74,19 @@ const ProductForm = () => {
         return { ...oldState, [PRODUCT_SKU_ERROR]: true }
       });
     }
+    if (productQuantity <= 0) {
+      setFormStateError(oldState => {
+        return { ...oldState, [PRODUCT_QUANTITY_ERROR]: true }
+      });
+    }
   }
   const clickSaveButton = () => {
     checkFieldsValidation();
-    if (productSKU.length && productName.length) {
+    if (productSKU.length && productName.length && productQuantity) {
       const productData = {
         [PRODUCT_NAME]: productName,
         [PRODUCT_SKU]: productSKU,
+        [PRODUCT_QUANTITY]: productQuantity,
         // [PRODUCT_IMAGES]:[],
         [PRODUCT_CREATED_BY_ID]: authReducerState?.[USER]?._id,
         [PRODUCT_CREATED_BY_EMAIL]: authReducerState?.[USER]?.email
@@ -77,6 +101,7 @@ const ProductForm = () => {
         [PRODUCT_ID]: productReducerState?.[PRODUCT_FORM_DATA]?.[PRODUCT_ID],
         [PRODUCT_NAME]: productName,
         [PRODUCT_SKU]: productSKU,
+        [PRODUCT_QUANTITY]: productQuantity
         // [PRODUCT_IMAGES]:[],
         // [PRODUCT_CREATED_BY_ID]: authReducerState?.[USER]?._id,
         // [PRODUCT_CREATED_BY_EMAIL]: authReducerState?.[USER]?.email
@@ -110,6 +135,18 @@ const ProductForm = () => {
         >
           <TextField name={PRODUCT_NAME} onChange={handleFieldChange} value={productName} error={formStateError?.[PRODUCT_NAME_ERROR]} label="Name" variant="outlined" />
           <TextField name={PRODUCT_SKU} onChange={handleFieldChange} error={formStateError?.[PRODUCT_SKU_ERROR]} value={productSKU} label="SKU" variant="outlined" />
+          <TextField
+            name={PRODUCT_QUANTITY}
+            onChange={handleNumberFieldChange}
+            error={formStateError?.[PRODUCT_QUANTITY_ERROR]}
+            label="Quantity"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={productQuantity}
+            variant="outlined"
+          />
         </Box>
         {productReducerState[SAVE_PRODUCT_DATA_ERROR] ? <Alert className="mx-2" variant="danger">{productReducerState[SAVE_PRODUCT_DATA_ERROR]}</Alert> : null}
       </Modal.Body>

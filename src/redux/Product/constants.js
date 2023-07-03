@@ -5,6 +5,7 @@ export const PRODUCT_REDUCER = 'productReducer';
 export const PRODUCT_ID = '_id';
 export const PRODUCT_NAME = 'name';
 export const PRODUCT_SKU = 'sku';
+export const PRODUCT_QUANTITY = 'quantity';
 export const PRODUCT_IMAGES = 'images';
 export const PRODUCT_CREATED_BY_ID = 'created_by_id';
 export const PRODUCT_CREATED_BY_EMAIL = 'created_by_email';
@@ -52,6 +53,7 @@ export const REMOVE_DELETED_PRODUCT_FROM_PRODUCT_LIST = 'remove_deleted_product_
 // errors keys
 export const PRODUCT_NAME_ERROR = 'name_error';
 export const PRODUCT_SKU_ERROR = 'sku_error';
+export const PRODUCT_QUANTITY_ERROR = 'quantity_error';
 
 
 export const PRODUCT_FULL_ACCESS = 'product_full_permission';
