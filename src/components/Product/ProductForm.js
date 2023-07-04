@@ -82,7 +82,7 @@ const ProductForm = () => {
   }
   const clickSaveButton = () => {
     checkFieldsValidation();
-    if (productSKU.length && productName.length && productQuantity) {
+    if (productSKU.length && productName.length && productQuantity > 0) {
       const productData = {
         [PRODUCT_NAME]: productName,
         [PRODUCT_SKU]: productSKU,
@@ -96,7 +96,7 @@ const ProductForm = () => {
   }
   const clickUpdateButton = () => {
     checkFieldsValidation();
-    if (productSKU.length && productName.length) {
+    if (productSKU.length && productName.length && productQuantity > 0) {
       const productData = {
         [PRODUCT_ID]: productReducerState?.[PRODUCT_FORM_DATA]?.[PRODUCT_ID],
         [PRODUCT_NAME]: productName,
