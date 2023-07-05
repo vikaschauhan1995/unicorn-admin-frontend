@@ -5,6 +5,7 @@ import authSaga from './Auth/saga';
 import subuserSaga from './Subuser/saga';
 import permissionSaga from './Permission/saga';
 import productSaga from './Product/saga';
+import orderSaga from './Order/saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -19,3 +20,4 @@ sagaMiddleware.run(authSaga);
 sagaMiddleware.run(subuserSaga);
 sagaMiddleware.run(permissionSaga);
 sagaMiddleware.run(productSaga);
+sagaMiddleware.run(orderSaga);

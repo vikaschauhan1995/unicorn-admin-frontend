@@ -15,11 +15,11 @@ const Product = () => {
   const dispatch = useDispatch();
   const authReducerState = useSelector(state => state[AUTH_REDUCER]);
   const isAccessible = isUserAccessible(PRODUCT_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions, authReducerState?.[USER]?.[USER_TYPE]);
-  console.log("authReducerState?.[USER]?.[USER_TYPE]", authReducerState?.[USER]?.[USER_TYPE]);
+  // console.log("authReducerState?.[USER]?.[USER_TYPE]", authReducerState?.[USER]?.[USER_TYPE]);
   return (
     <div className="Product__container">
       <div className="Product__head mx-3">
-        <div><h3>Product Page</h3></div>
+        <div><h3>Product</h3></div>
         <div>
           <Button variant="contained" disabled={isAccessible ? false : true} onClick={() => dispatch(setProductFormVisibilityAction())} >Add New</Button>
         </div>
