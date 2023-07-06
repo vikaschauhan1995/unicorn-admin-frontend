@@ -19,7 +19,7 @@ const Orders = () => {
       <div className="Order__head mx-3">
         <div><h3>Order</h3></div>
         <div>
-          <Button variant="contained" onClick={() => dispatch(toggleOrderFormVisibleAction())}>Add Order</Button>
+          <Button variant="contained" onClick={() => dispatch(toggleOrderFormVisibleAction())}>New</Button>
         </div>
       </div>
       <div className="Order__body mx-3">

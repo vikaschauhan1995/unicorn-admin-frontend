@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { ORDER_PRODUCT_ID, ORDER_REDUCER, PRODUCT_QUANTITY } from '../../redux/Order/constants';
+import { FORM_STATE_ERRORS, ORDER_PRODUCT_ERROR, ORDER_PRODUCT_ERRORS, ORDER_PRODUCT_ID, ORDER_PRODUCT_QUANTITY_ERROR, ORDER_REDUCER, PRODUCT_QUANTITY } from '../../redux/Order/constants';
 import IconButton from '@mui/material/IconButton';
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField';
 import { useSelector, useDispatch } from 'react-redux';
 import { PRODUCT_LIST, PRODUCT_REDUCER, PRODUCT_ID, PRODUCT_NAME, PRODUCT_SKU } from '../../redux/Product/constants';
 import Stack from '@mui/material/Stack';
-import { removeOrderProductVirtualFieldAction, updateProductFromProductListAction, updateQuantityFromFormProductListAction } from '../../redux/Order/actions';
+import { removeErrorDataUsedForProductVirtualFieldByIndexAction, removeOrderProductVirtualFieldAction, removeProductFromOrderFormProductListAction, updateErrorDataUsedForProductVirualFieldByIdIndexAction, updateProductFromProductListAction, updateQuantityFromFormProductListAction } from '../../redux/Order/actions';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -37,7 +37,7 @@ const MenuProps = {
 // }
 
 
-const OrderProductsVirualFields = ({ key_, productData }) => {
+const OrderProductsVirualFields = ({ index, productData }) => {
   // const theme = useTheme();
   // const [personName, setPersonName] = useState([]);
   const dispatch = useDispatch();
@@ -57,30 +57,49 @@ const OrderProductsVirualFields = ({ key_, productData }) => {
     const {
       target: { value },
     } = event;
-    const selectedProduct_id = typeof value === 'string' ? value.split(',') : value[0];
-    const selectedProduct = getSelectedProductById(productList, selectedProduct_id);
-    // console.log("selectedProduct=>", selectedProduct);
-    dispatch(updateProductFromProductListAction({ selectedProduct, index: key_ }));
+    if (value) {
+      const selectedProduct_id = typeof value === 'string' ? value.split(',') : value[0];
+      const selectedProduct = getSelectedProductById(productList, selectedProduct_id);
+      // console.log("selectedProduct=>", value);
+      dispatch(updateProductFromProductListAction({ selectedProduct, index: index }));
+      dispatch(updateErrorDataUsedForProductVirualFieldByIdIndexAction(false, index, ORDER_PRODUCT_ERROR));
+    } else {
+      dispatch(updateErrorDataUsedForProductVirualFieldByIdIndexAction(true, index, ORDER_PRODUCT_ERROR));
+    }
   };
   const handleQuantityChange = (event, index) => {
-    const value = event.target.value;
+    const value = event?.target?.value;
+    const key = event?.target?.name;
+    // console.log("VALUE KEY=>", value, key);
     dispatch(updateQuantityFromFormProductListAction({ index, [PRODUCT_QUANTITY]: value }));
+    if (value <= 0) {
+      dispatch(updateErrorDataUsedForProductVirualFieldByIdIndexAction(true, index, key + "_error"));
+    } else {
+      dispatch(updateErrorDataUsedForProductVirualFieldByIdIndexAction(false, index, key + "_error"));
+    }
+  }
+  const clickRemoveProduct = (index) => {
+    dispatch(removeProductFromOrderFormProductListAction(index));
+    dispatch(removeErrorDataUsedForProductVirtualFieldByIndexAction(index));
   }
   // console.log("orderReducerState", orderReducerState);
+  const hasQuantityError = orderReducerState?.[FORM_STATE_ERRORS]?.[ORDER_PRODUCT_ERRORS]?.[index]?.[ORDER_PRODUCT_QUANTITY_ERROR];
+  const hasProductError = orderReducerState?.[FORM_STATE_ERRORS]?.[ORDER_PRODUCT_ERRORS]?.[index]?.[ORDER_PRODUCT_ERROR];
   return (
     <Stack className="w-100 mx-0" direction="row">
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Product {key_}</InputLabel>
+        <InputLabel id="demo-multiple-name-label">Product {index}</InputLabel>
         <Select
-          // name={productData?.[ORDER_PRODUCT_ID] + "_" + key_}
-          // name={`${ORDER_PRODUCT_ID}_${key_}`}
+          // name={productData?.[ORDER_PRODUCT_ID] + "_" + index}
+          // name={`${ORDER_PRODUCT_ID}_${index}`}
           // multiple
           value={productData?.[ORDER_PRODUCT_ID] ? productData?.[ORDER_PRODUCT_ID] : ""}
           onChange={handleOptionSelectChange}
           input={<OutlinedInput label="Name" />}
+          error={hasProductError}
           MenuProps={MenuProps}
         >
-          {/* <MenuItem>Option</MenuItem> */}
+          <MenuItem>Option</MenuItem>
           {productList.map((product) => (
             <MenuItem
               key={product?.[PRODUCT_ID]}
@@ -94,9 +113,9 @@ const OrderProductsVirualFields = ({ key_, productData }) => {
         </Select>
       </FormControl>
       <TextField
-        name={`${PRODUCT_QUANTITY}_${key_}`}
-        onChange={(event) => handleQuantityChange(event, key_)}
-        error={productData?.[PRODUCT_QUANTITY] <= 0}
+        name={`${PRODUCT_QUANTITY}`}
+        onChange={(event) => handleQuantityChange(event, index)}
+        error={hasQuantityError}
         value={productData?.[PRODUCT_QUANTITY]}
         label="Quantity"
         type="number"
@@ -107,10 +126,10 @@ const OrderProductsVirualFields = ({ key_, productData }) => {
         variant="outlined"
         style={{ marginTop: "9px" }}
       />
-      <Button color="error">
-        <IconButton>
-          <FontAwesomeIcon icon={faMinus} />
-        </IconButton>
+      <Button color="error" onClick={() => clickRemoveProduct(index)}>
+        {/* <IconButton size="large"> */}
+        <FontAwesomeIcon icon={faMinus} size="2x" />
+        {/* </IconButton> */}
       </Button>
     </Stack >
 

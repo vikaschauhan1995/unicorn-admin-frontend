@@ -24,6 +24,17 @@ const ORDER_MODIFIED_LAST = 'modified_last';
 const CUSTOM_ORDER_GENERATE_KEY = 'custom';
 const PROGRAM_ORDER_GENERATE_KEY = 'program';
 
+// error keys for form fields
+export const FORM_STATE_ERRORS = 'form_state_error';
+export const ORDER_NAME_ERROR = 'name_error';
+export const ORDER_MOBILE_ERROR = 'mobile_error';
+export const ORDER_ADDRESS_ERROR = 'address_error';
+export const ORDER_STATE_ERROR = 'state_error';
+export const ORDER_PIN_ERROR = 'pin_error';
+export const ORDER_PRODUCT_ERRORS = 'product_errors';
+export const ORDER_PRODUCT_ERROR = 'product_error';
+export const ORDER_PRODUCT_QUANTITY_ERROR = 'quantity_error';
+
 
 export const ORDER_FORM_DATA = 'order_form_data';
 
@@ -33,3 +44,9 @@ export const ADD_ORDER_PRODCUT_VIRTUAL_FIELD_ACTION = 'add_order_product_virtual
 export const REMOVE_ORDER_PRODUCT_VIRTUAL_FIELD_ACTION = 'remove_order_product_virtual_field_action';
 export const UPDATE_PRODUCT_FROM_PRODUCT_LIST_ACTION = 'update_product_from_product_list_action';
 export const UPDATE_QUANTITY_FROM_FORM_PRODUCT_LIST_ACTION = 'update_quantity_from_form_product_list_action';
+export const REMOVE_PRODUCT_FROM_ORDER_FORM_PRODUCT_LIST_ACTION = 'remove_order_product_from_order_form_product';
+export const SET_ORDER_FORM_DATA_ACTION = 'set_order_form_data_action';
+export const SET_ERROR_ON_FIELD_BY_KEY_VALUE_ACTION = 'set_error_on_field_by_key_value_action';
+export const ADD_ERROR_DATA_FOR_PRODUCT_VIRTUAL_FIELD_ACTION = 'add_error_data_for_product_virtual_field_action';
+export const REMOVE_ERROR_DATA_USED_FOR_PRODUCT_VIRTUAL_FIELD_BY_INDEX_ACTION = 'remove_error_data_used_for_product_virtual_field_by_index_action';
+export const UPDATE_ERROR_DATA_USED_FOR_PRODUCT_VIRTUAL_FIELD_BY_INDEX_ACTION = 'update_error_data_used_for_product_virtual_field_by_index_action';
