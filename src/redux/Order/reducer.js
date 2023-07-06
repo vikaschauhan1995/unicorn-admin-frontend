@@ -24,25 +24,27 @@ import {
   ORDER_PRODUCT_ERROR,
   ADD_ERROR_DATA_FOR_PRODUCT_VIRTUAL_FIELD_ACTION,
   REMOVE_ERROR_DATA_USED_FOR_PRODUCT_VIRTUAL_FIELD_BY_INDEX_ACTION,
-  UPDATE_ERROR_DATA_USED_FOR_PRODUCT_VIRTUAL_FIELD_BY_INDEX_ACTION
+  UPDATE_ERROR_DATA_USED_FOR_PRODUCT_VIRTUAL_FIELD_BY_INDEX_ACTION,
+  IS_SAVE_ORDER_LOADING,
+  SET_IS_SAVE_ORDER_LOADING
 } from "./constants";
 
 
 const initialState = {
   [IS_ORDER_FORM_VISIBLE]: true,
   [ORDER_FORM_DATA]: {
-    [ORDER_NAME]: '',
-    [ORDER_MOBILE]: 0,
-    [ORDER_ADDRESS]: '',
-    [ORDER_STATE]: '',
-    [ORDER_PIN]: 0,
+    [ORDER_NAME]: 'Vikas',
+    [ORDER_MOBILE]: 988,
+    [ORDER_ADDRESS]: 'delhi',
+    [ORDER_STATE]: 'delhi',
+    [ORDER_PIN]: 1100,
     [ORDER_PRODUCTS]: [
       {
-        // [ORDER_PRODUCT_ID]: "64a2f3a84cd697d71882bd26",
-        // "name": "Samsung Galaxy S20",
-        // "sku": "SAMG0020",
-        // "images": [],
-        [PRODUCT_QUANTITY]: 0
+        [ORDER_PRODUCT_ID]: "64a2f3a84cd697d71882bd26",
+        "name": "Samsung Galaxy S20",
+        "sku": "SAMG0020",
+        "images": [],
+        [PRODUCT_QUANTITY]: 1
       }
     ]
   },
@@ -58,7 +60,8 @@ const initialState = {
         [ORDER_PRODUCT_QUANTITY_ERROR]: false
       }
     ]
-  }
+  },
+  [IS_SAVE_ORDER_LOADING]: false
 }
 
 export const reducer = (state = initialState, action) => {
@@ -197,6 +200,8 @@ export const reducer = (state = initialState, action) => {
           }
         };
       }
+    case SET_IS_SAVE_ORDER_LOADING:
+      return { ...state, [IS_SAVE_ORDER_LOADING]: action?.payload };
     default:
       return state;
   }

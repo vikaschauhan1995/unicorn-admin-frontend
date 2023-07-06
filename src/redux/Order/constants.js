@@ -15,13 +15,13 @@ export const ORDER_PIN = 'pin';
 export const ORDER_PRODUCTS = 'products';
 export const ORDER_PRODUCT_ID = '_id';
 export const PRODUCT_QUANTITY = 'quantity';
-const ORDER_CREATED_BY_ID = 'created_by_id';
-const ORDER_CREATED_BY_EMAIL = 'created_by_email';
-const ORDER_ORIGIN = 'origin';
+export const ORDER_CREATED_BY_ID = 'created_by_id';
+export const ORDER_CREATED_BY_EMAIL = 'created_by_email';
+export const ORDER_ORIGIN = 'origin';
 const ORDER_CREATED_AT = 'created_at';
 const ORDER_MODIFIED_LAST = 'modified_last';
 
-const CUSTOM_ORDER_GENERATE_KEY = 'custom';
+export const CUSTOM_ORDER_GENERATE_KEY = 'custom';
 const PROGRAM_ORDER_GENERATE_KEY = 'program';
 
 // error keys for form fields
@@ -50,3 +50,9 @@ export const SET_ERROR_ON_FIELD_BY_KEY_VALUE_ACTION = 'set_error_on_field_by_key
 export const ADD_ERROR_DATA_FOR_PRODUCT_VIRTUAL_FIELD_ACTION = 'add_error_data_for_product_virtual_field_action';
 export const REMOVE_ERROR_DATA_USED_FOR_PRODUCT_VIRTUAL_FIELD_BY_INDEX_ACTION = 'remove_error_data_used_for_product_virtual_field_by_index_action';
 export const UPDATE_ERROR_DATA_USED_FOR_PRODUCT_VIRTUAL_FIELD_BY_INDEX_ACTION = 'update_error_data_used_for_product_virtual_field_by_index_action';
+export const SAVE_ORDER_ACTION = 'save_order_action';
+
+
+// actions for loading
+export const SET_IS_SAVE_ORDER_LOADING = 'set_save_order_loading';
+export const IS_SAVE_ORDER_LOADING = 'is_save_order_loading';

@@ -19,18 +19,25 @@ import {
   FORM_STATE_ERRORS,
   ORDER_PRODUCT_QUANTITY_ERROR,
   ORDER_PRODUCT_ERROR,
+  IS_SAVE_ORDER_LOADING,
+  ORDER_CREATED_BY_ID,
+  ORDER_CREATED_BY_EMAIL,
+  ORDER_ORIGIN,
+  CUSTOM_ORDER_GENERATE_KEY
 } from '../../redux/Order/constants';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import IconButton from '@mui/material/IconButton';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { addErrorDataForProductVirtualFieldAction, addOrderProductVirualFieldAction, setErrorOnFieldByKeyValueAction, setOrderFormDataAction, toggleOrderFormVisibleAction, updateErrorDataUsedForProductVirualFieldByIdIndexAction } from '../../redux/Order/actions';
+import { addErrorDataForProductVirtualFieldAction, addOrderProductVirualFieldAction, saveOrderAction, setErrorOnFieldByKeyValueAction, setOrderFormDataAction, toggleOrderFormVisibleAction, updateErrorDataUsedForProductVirualFieldByIdIndexAction } from '../../redux/Order/actions';
 import OrderProductsVirualFields from './OrderProductsVirualFields';
+import { AUTH_REDUCER, USER, EMAIL } from '../../redux/Auth/constants';
 
 
 const OrderForm = () => {
   const dispatch = useDispatch();
+  const authReducerState = useSelector(state => state[AUTH_REDUCER]);
   const orderReducerState = useSelector(state => state[ORDER_REDUCER]);
   const clickCloseButton = () => {
     dispatch(toggleOrderFormVisibleAction());
@@ -72,7 +79,7 @@ const OrderForm = () => {
       dispatch(setErrorOnFieldByKeyValueAction(key + '_error', false));
     }
   }
-  // console.log("orderReducerState=>", orderReducerState);
+
   const name = orderReducerState?.[ORDER_FORM_DATA]?.[ORDER_NAME];
   const mobile = orderReducerState?.[ORDER_FORM_DATA]?.[ORDER_MOBILE];
   const address = orderReducerState?.[ORDER_FORM_DATA]?.[ORDER_ADDRESS];
@@ -85,7 +92,7 @@ const OrderForm = () => {
   const stateError = orderReducerState?.[FORM_STATE_ERRORS]?.[ORDER_STATE_ERROR];
   const pinError = orderReducerState?.[FORM_STATE_ERRORS]?.[ORDER_PIN_ERROR];
 
-  const checkVirualProductFormFieldsValidation = () => {
+  const checkVirualProductFormFieldsValidationError = () => {
     const virtualProductErros = orderReducerState?.[ORDER_FORM_DATA]?.[ORDER_PRODUCTS];
     let hasError = false;
     try {
@@ -104,9 +111,8 @@ const OrderForm = () => {
       console.log("error: ", error.message);
       return true;
     }
-    // console.log("virtualProductErros=>", virtualProductErros);
   }
-  const checkFormValidation = () => {
+  const checkFormValidationError = () => {
     let hasAnyError = false;
     if (!name.length) {
       dispatch(setErrorOnFieldByKeyValueAction(ORDER_NAME_ERROR, true));
@@ -128,13 +134,20 @@ const OrderForm = () => {
       dispatch(setErrorOnFieldByKeyValueAction(ORDER_PIN_ERROR, true));
       hasAnyError = true;
     }
-    if (checkVirualProductFormFieldsValidation() === false && hasAnyError === false) {
-      console.log("yoyoy");
-    }
+    return hasAnyError;
   }
   const clickSaveButton = () => {
-    checkFormValidation();
+    if (checkVirualProductFormFieldsValidationError() === false && checkFormValidationError() === false) {
+      const order = {
+        ...orderReducerState?.[ORDER_FORM_DATA],
+        [ORDER_CREATED_BY_ID]: authReducerState?.[USER]?._id,
+        [ORDER_CREATED_BY_EMAIL]: authReducerState?.[USER]?.[EMAIL],
+        [ORDER_ORIGIN]: CUSTOM_ORDER_GENERATE_KEY,
+      };
+      dispatch(saveOrderAction(order));
+    }
   }
+  // console.log("authReducerState=>", authReducerState);
   return (
     <div>
       <Modal show={orderReducerState?.[IS_ORDER_FORM_VISIBLE]} onHide={clickCloseButton}>
@@ -192,7 +205,7 @@ const OrderForm = () => {
           <Button variant="secondary" onClick={clickCloseButton}>
             Close
           </Button>
-          <Button variant="contained" onClick={clickSaveButton}>
+          <Button variant="contained" disabled={orderReducerState?.[IS_SAVE_ORDER_LOADING]} onClick={clickSaveButton}>
             Save
           </Button>
         </Modal.Footer>
