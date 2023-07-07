@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Order from './pages/Order';
+import Orders from './pages/Orders';
 import Subuser from './pages/Subuser';
 import { useEffect } from 'react';
 import { AUTH_REDUCER, USER } from './redux/Auth/constants';
@@ -43,7 +43,8 @@ function App() {
                   <PermissionWrapper user_type={state?.[USER]?.[USER_TYPE]}>
                     <Routes>
                       <Route exact path="/" element={<Home />} />
-                      <Route exact path="/order" element={<Order />} />
+                      <Route exact path="/orders" element={<Orders />} />
+                      {/* <Route exact path="/order/:id" element={<Order />} /> */}
                       <Route exact path="/subuser" element={<Subuser />} />
                       <Route exact path="/product" element={<Product />} />
                       <Route exact path="/inventory" element={<Inventory />} />
