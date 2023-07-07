@@ -26,24 +26,39 @@ import {
   REMOVE_ERROR_DATA_USED_FOR_PRODUCT_VIRTUAL_FIELD_BY_INDEX_ACTION,
   UPDATE_ERROR_DATA_USED_FOR_PRODUCT_VIRTUAL_FIELD_BY_INDEX_ACTION,
   IS_SAVE_ORDER_LOADING,
-  SET_IS_SAVE_ORDER_LOADING
+  SET_IS_SAVE_ORDER_LOADING,
+  SET_IS_GET_ORDER_LOADING,
+  IS_GET_ORDER_LOADING,
+  SET_ORDER_LIST,
+  ORDER_LIST,
+  SET_COMPLETE_ORDER_TO_FORM_ACTION,
+  MAKE_BACK_TO_INITIAL_STATE_OF_FORM_DATA_ACTION,
+  MAKE_BACK_TO_INTIAL_STATE_OF_FORM_DATA_ERROR_ACTION,
+  ADD_ORDER_TO_PRODUCT_LIST_ACTION,
+  UPDATE_AN_ORDER_FROM_ORDER_LIST_ACTION,
+  SET_SELECTED_ORDER_FOR_DELETING,
+  SELECTED_ORDER_FOR_DELETING,
+  REMOVE_SELECTED_ORDER_FOR_DELETING_ACTION,
+  SET_IS_DELETE_ORDER_LOADING,
+  IS_DELETE_ORDER_LOADING,
+  REMOVE_AN_ORDER_FROM_ORDER_LIST
 } from "./constants";
 
 
 const initialState = {
-  [IS_ORDER_FORM_VISIBLE]: true,
+  [IS_ORDER_FORM_VISIBLE]: false,
   [ORDER_FORM_DATA]: {
-    [ORDER_NAME]: 'Vikas',
-    [ORDER_MOBILE]: 988,
-    [ORDER_ADDRESS]: 'delhi',
-    [ORDER_STATE]: 'delhi',
-    [ORDER_PIN]: 1100,
+    [ORDER_NAME]: '',
+    [ORDER_MOBILE]: 0,
+    [ORDER_ADDRESS]: '',
+    [ORDER_STATE]: '',
+    [ORDER_PIN]: 0,
     [ORDER_PRODUCTS]: [
       {
-        [ORDER_PRODUCT_ID]: "64a2f3a84cd697d71882bd26",
-        "name": "Samsung Galaxy S20",
-        "sku": "SAMG0020",
-        "images": [],
+        // [ORDER_PRODUCT_ID]: "64a2f3a84cd697d71882bd26",
+        // "name": "Samsung Galaxy S20",
+        // "sku": "SAMG0020",
+        // "images": [],
         [PRODUCT_QUANTITY]: 1
       }
     ]
@@ -61,7 +76,12 @@ const initialState = {
       }
     ]
   },
-  [IS_SAVE_ORDER_LOADING]: false
+  [IS_SAVE_ORDER_LOADING]: false,
+  [IS_GET_ORDER_LOADING]: false,
+
+  [ORDER_LIST]: [],
+  [SELECTED_ORDER_FOR_DELETING]: null,
+  [IS_DELETE_ORDER_LOADING]: false,
 }
 
 export const reducer = (state = initialState, action) => {
@@ -124,6 +144,7 @@ export const reducer = (state = initialState, action) => {
         }
       }
     case SET_ORDER_FORM_DATA_ACTION:
+      // ! set individual field data to ORDER_FORM_DATA
       {
         const key = action?.payload?.key;
         const value = action?.payload?.value;
@@ -201,7 +222,74 @@ export const reducer = (state = initialState, action) => {
         };
       }
     case SET_IS_SAVE_ORDER_LOADING:
+      // ! loading while saving new custom order
       return { ...state, [IS_SAVE_ORDER_LOADING]: action?.payload };
+    case SET_IS_GET_ORDER_LOADING:
+      // ! loading while fetching all orders
+      return { ...state, [IS_GET_ORDER_LOADING]: action?.payload }
+    case SET_ORDER_LIST:
+      // ! set order list
+      return { ...state, [ORDER_LIST]: action?.payload };
+    case SET_COMPLETE_ORDER_TO_FORM_ACTION:
+      // ! set complete order data to ORDER_FORM_DATA with products
+      return {
+        ...state,
+        [ORDER_FORM_DATA]: action?.payload
+      }
+    case MAKE_BACK_TO_INITIAL_STATE_OF_FORM_DATA_ACTION:
+      // ! this case will make the form data as it was as initial state
+      return {
+        ...state,
+        [ORDER_FORM_DATA]: initialState?.[ORDER_FORM_DATA]?.[ORDER_PRODUCTS]
+      }
+    case MAKE_BACK_TO_INTIAL_STATE_OF_FORM_DATA_ERROR_ACTION:
+      return {
+        ...state,
+        [FORM_STATE_ERRORS]: initialState?.[FORM_STATE_ERRORS]
+      };
+    case ADD_ORDER_TO_PRODUCT_LIST_ACTION:
+      {
+        // ! push an item into the order list
+        const list = [...state?.[ORDER_LIST]];
+        list.unshift(action.payload);
+        // console.log("list=>", list);
+        return {
+          ...state,
+          [ORDER_LIST]: list
+        }
+      }
+    case UPDATE_AN_ORDER_FROM_ORDER_LIST_ACTION:
+      {
+        const oldList = [...state?.[ORDER_LIST]];
+        const newList = oldList.map((order) => {
+          if (order?._id === action?.payload?._id) {
+            return action?.payload;
+          } else {
+            return order;
+          }
+        });
+        // console.log("oldList newList=>", oldList, newList, action?.payload);
+        return { ...state, [ORDER_LIST]: newList };
+      }
+    case SET_SELECTED_ORDER_FOR_DELETING:
+      return { ...state, [SELECTED_ORDER_FOR_DELETING]: action?.payload };
+    case REMOVE_SELECTED_ORDER_FOR_DELETING_ACTION:
+      return { ...state, [SELECTED_ORDER_FOR_DELETING]: null };
+    case SET_IS_DELETE_ORDER_LOADING:
+      return { ...state, [IS_DELETE_ORDER_LOADING]: action?.payload };
+    case REMOVE_AN_ORDER_FROM_ORDER_LIST:
+      {
+        const list = [...state?.[ORDER_LIST]];
+        const newList = list.filter(order => {
+          if (order?._id !== action?.payload?._id) {
+            return order;
+          }
+        });
+        return {
+          ...state,
+          [ORDER_LIST]: newList
+        }
+      }
     default:
       return state;
   }

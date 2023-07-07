@@ -18,8 +18,8 @@ export const PRODUCT_QUANTITY = 'quantity';
 export const ORDER_CREATED_BY_ID = 'created_by_id';
 export const ORDER_CREATED_BY_EMAIL = 'created_by_email';
 export const ORDER_ORIGIN = 'origin';
-const ORDER_CREATED_AT = 'created_at';
-const ORDER_MODIFIED_LAST = 'modified_last';
+export const ORDER_CREATED_AT = 'created_at';
+export const ORDER_MODIFIED_LAST = 'modified_last';
 
 export const CUSTOM_ORDER_GENERATE_KEY = 'custom';
 const PROGRAM_ORDER_GENERATE_KEY = 'program';
@@ -38,6 +38,8 @@ export const ORDER_PRODUCT_QUANTITY_ERROR = 'quantity_error';
 
 export const ORDER_FORM_DATA = 'order_form_data';
 
+export const SET_ORDER_LIST = 'set_order_list';
+export const ORDER_LIST = 'order_list';
 
 // actions
 export const ADD_ORDER_PRODCUT_VIRTUAL_FIELD_ACTION = 'add_order_product_virtual_field_action';
@@ -51,8 +53,26 @@ export const ADD_ERROR_DATA_FOR_PRODUCT_VIRTUAL_FIELD_ACTION = 'add_error_data_f
 export const REMOVE_ERROR_DATA_USED_FOR_PRODUCT_VIRTUAL_FIELD_BY_INDEX_ACTION = 'remove_error_data_used_for_product_virtual_field_by_index_action';
 export const UPDATE_ERROR_DATA_USED_FOR_PRODUCT_VIRTUAL_FIELD_BY_INDEX_ACTION = 'update_error_data_used_for_product_virtual_field_by_index_action';
 export const SAVE_ORDER_ACTION = 'save_order_action';
+export const UPDATE_ORDER_ACTION = 'update_order_action';
+export const SET_COMPLETE_ORDER_TO_FORM_ACTION = 'set_complete_order_to_form_action';
+export const MAKE_BACK_TO_INITIAL_STATE_OF_FORM_DATA_ACTION = 'make_back_to_initial_state_of_form_action';
+export const MAKE_BACK_TO_INTIAL_STATE_OF_FORM_DATA_ERROR_ACTION = 'make_back_to_initial_state_of_form_data_error_action';
+export const ADD_ORDER_TO_PRODUCT_LIST_ACTION = 'add_order_to_product_list_action';
+export const UPDATE_AN_ORDER_FROM_ORDER_LIST_ACTION = 'update_an_order_from_order_list_action';
+export const SET_SELECTED_ORDER_FOR_DELETING = 'set_selected_order_for_deleting';
+export const SELECTED_ORDER_FOR_DELETING = 'selected_order_for_deleting';
+export const REMOVE_SELECTED_ORDER_FOR_DELETING_ACTION = 'remove_selected_order_for_deleting_action';
+export const DELETE_ORDER_ACTION = 'delete_order_action';
+export const REMOVE_AN_ORDER_FROM_ORDER_LIST = 'remove_an_order_from_order_list';
 
+export const GET_ORDER_LIST = 'get_order_list';
 
 // actions for loading
 export const SET_IS_SAVE_ORDER_LOADING = 'set_save_order_loading';
 export const IS_SAVE_ORDER_LOADING = 'is_save_order_loading';
+
+export const SET_IS_GET_ORDER_LOADING = 'set_save_order_loading';
+export const IS_GET_ORDER_LOADING = 'is_get_order_loading';
+
+export const SET_IS_DELETE_ORDER_LOADING = 'set_delete_order_loading';
+export const IS_DELETE_ORDER_LOADING = 'is_delete_order_loading';

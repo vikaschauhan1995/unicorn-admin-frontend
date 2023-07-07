@@ -30,7 +30,7 @@ import TextField from '@mui/material/TextField';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import IconButton from '@mui/material/IconButton';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { addErrorDataForProductVirtualFieldAction, addOrderProductVirualFieldAction, saveOrderAction, setErrorOnFieldByKeyValueAction, setOrderFormDataAction, toggleOrderFormVisibleAction, updateErrorDataUsedForProductVirualFieldByIdIndexAction } from '../../redux/Order/actions';
+import { addErrorDataForProductVirtualFieldAction, addOrderProductVirualFieldAction, makeBackToInitialStateOfFormDataAction, makeBackToInitialStateOfFormDataErrorAction, saveOrderAction, setErrorOnFieldByKeyValueAction, setOrderFormDataAction, toggleOrderFormVisibleAction, updateErrorDataUsedForProductVirualFieldByIdIndexAction, updateOrderAction } from '../../redux/Order/actions';
 import OrderProductsVirualFields from './OrderProductsVirualFields';
 import { AUTH_REDUCER, USER, EMAIL } from '../../redux/Auth/constants';
 
@@ -40,6 +40,10 @@ const OrderForm = () => {
   const authReducerState = useSelector(state => state[AUTH_REDUCER]);
   const orderReducerState = useSelector(state => state[ORDER_REDUCER]);
   const clickCloseButton = () => {
+    if (orderReducerState?.[ORDER_FORM_DATA]?._id) {
+      dispatch(makeBackToInitialStateOfFormDataAction());
+      dispatch(makeBackToInitialStateOfFormDataErrorAction());
+    }
     dispatch(toggleOrderFormVisibleAction());
   }
   const virtualProductListData = orderReducerState?.[ORDER_FORM_DATA]?.[ORDER_PRODUCTS];
@@ -147,12 +151,21 @@ const OrderForm = () => {
       dispatch(saveOrderAction(order));
     }
   }
+  const clickUpdateButton = () => {
+    if (checkVirualProductFormFieldsValidationError() === false && checkFormValidationError() === false) {
+      const order = {
+        ...orderReducerState?.[ORDER_FORM_DATA],
+      };
+      dispatch(updateOrderAction(order));
+    }
+  }
+  const isOrderSelectedInForm = orderReducerState?.[ORDER_FORM_DATA]?._id;
   // console.log("authReducerState=>", authReducerState);
   return (
     <div>
       <Modal show={orderReducerState?.[IS_ORDER_FORM_VISIBLE]} onHide={clickCloseButton}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Custom Order</Modal.Title>
+          <Modal.Title>{isOrderSelectedInForm ? "Update" : "Add"} Custom Order</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Box
@@ -205,8 +218,8 @@ const OrderForm = () => {
           <Button variant="secondary" onClick={clickCloseButton}>
             Close
           </Button>
-          <Button variant="contained" disabled={orderReducerState?.[IS_SAVE_ORDER_LOADING]} onClick={clickSaveButton}>
-            Save
+          <Button variant="contained" disabled={orderReducerState?.[IS_SAVE_ORDER_LOADING]} onClick={isOrderSelectedInForm ? clickUpdateButton : clickSaveButton}>
+            {isOrderSelectedInForm ? "Update" : "Add"}
           </Button>
         </Modal.Footer>
       </Modal>
