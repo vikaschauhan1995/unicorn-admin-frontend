@@ -11,6 +11,8 @@ import { SUBUSER_REDUCER, USER_TYPE, IS_SAVE_SUBUSER_LOADING, IS_SAVE_SUBUSER_ER
 import { getAllPermissionsAction } from '../redux/Permission/actions';
 import isUserAccessible from '../utils/isUserAccessible';
 import { AUTH_REDUCER, USER } from '../redux/Auth/constants';
+import TextField from '@mui/material/TextField';
+
 
 const EMAIL = 'email';
 const PASSWORD = 'password';
@@ -49,7 +51,7 @@ const AddSubuserForm = () => {
       [USER_TYPE]: "subuser"
     }
     dispatch(addSubUserAction(subuser));
-    // console.log("subuser", JSON.stringify(subuser));
+    console.log("subuser", JSON.stringify(subuser));
   }
   const optionsListCreated = () => {
     const pList = permissionList?.length > 0 ? permissionList : [];
@@ -85,17 +87,31 @@ const AddSubuserForm = () => {
           type="email" name="email" onChange={handleChange} value={state[EMAIL]}
           placeholder="enter email as Sub-User"
         />
+        {/* <TextField
+          id="outlined-multiline-flexible"
+          label="Email"
+          minRows={8}
+          type="email" name="email" onChange={handleChange} value={state[EMAIL]}
+          placeholder="enter email as Sub-User"
+        /> */}
         <label>Password:</label>
         <Form.Control
           type="password" name="password" onChange={handleChange} value={state[PASSWORD]}
           placeholder="********"
         />
-        <Form.Control as="select" multiple onChange={e => setField([].slice.call(e.target.selectedOptions).map(item => item.value))}>
+        {/* <TextField
+          id="outlined-multiline-flexible"
+          label="Password"
+          maxRows={12}
+          type="password" name="password" onChange={handleChange} value={state[PASSWORD]}
+          placeholder="********"
+        /> */}
+        <Form.Control className="my-2" as="select" multiple onChange={e => setField([].slice.call(e.target.selectedOptions).map(item => item.value))}>
           {optionsListCreated()}
         </Form.Control>
         <Button variant="contained" className={style.btn} disabled={isAccessible ? subuserReducerState?.[IS_SAVE_SUBUSER_LOADING] : true}>Submit</Button>
       </form>
-      *Sub-user can not be edited, but can be deleted with its given permissions
+      <p className="text-danger">*Sub-user can not be edited, but can be deleted with its given permissions</p>
       {subuserReducerState[IS_SAVE_SUBUSER_ERROR] && <Alert key="danger" variant="danger">
         {subuserReducerState[IS_SAVE_SUBUSER_ERROR]}
       </Alert>}

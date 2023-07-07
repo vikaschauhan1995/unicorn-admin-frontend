@@ -4,7 +4,7 @@ import SubuserList from '../components/Subuser/SubuserList'
 
 const Subuser = () => {
   return (
-    <div>
+    <div className="mx-3">
       <AddSubuserForm />
       <SubuserList />
     </div>

@@ -47,6 +47,7 @@
 }
 
 .App__root_container {
+  // margin-top: 40px;
   flex: 1;
   display: flex;
   // border: 2px solid green;
@@ -54,10 +55,11 @@
 
 .App__body {
   flex: 1;
+  margin-top: 10px;
   // border: 1px solid red;
 }
 
 .App__sidebar {
   width: 200px;
-  background-color: aqua;
+  border-right: 1px solid rgb(239, 239, 239);
 }

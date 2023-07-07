@@ -10,6 +10,13 @@ import style from '../../style/Button.module.scss';
 import isUserAccessible from '../../utils/isUserAccessible';
 import { PERMISSIONS } from '../../redux/Permission/constants';
 
+import Box from '@mui/material/Box';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+
+
+
+
 const SubuserList = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state);
@@ -29,22 +36,22 @@ const SubuserList = () => {
       if (!array?.length) {
         return "You can't see the permissions of subusers";
       }
-      let permissionsString = "";
-      array.forEach((permission, index) => {
-        permissionsString += permission?.key;
-        if (!(array.length <= 1) && index !== array.length - 1) {
-          permissionsString += ", ";
-        }
+      const list = array.map((permission, index) => {
+        return <span className="Subuser_list_permission_item mx-1 px-2 py-1">{permission?.key}</span>
       });
-      return permissionsString;
+      return <div>{list}</div>;
     }
     const l = subusers?.map(subuser => {
-      return <Card key={subuser?._id}>
-        <Card.Title>{subuser?.email}</Card.Title>
-        <Card.Text>{permissionsList(subuser?.[PERMISSIONS]?.[0]?.permissions)}</Card.Text>
-        <div>
-          <Button variant="contained" color="error" className={style.btn} disabled={!isAccessible ? true : subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id} onClick={() => clickDeleteButton(subuser)}>{subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id ? 'Loading' : 'Delete'}</Button>
-        </div>
+      return <Card key={subuser?._id} className="my-2">
+        <CardContent>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            <Card.Title>{subuser?.email}</Card.Title>
+          </Typography>
+          <Card.Text>{permissionsList(subuser?.[PERMISSIONS]?.[0]?.permissions)}</Card.Text>
+          <div>
+            <Button variant="contained" color="error" className={style.btn} disabled={!isAccessible ? true : subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id} onClick={() => clickDeleteButton(subuser)}>{subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id ? 'Loading' : 'Delete'}</Button>
+          </div>
+        </CardContent>
       </Card>
     });
     return l;
