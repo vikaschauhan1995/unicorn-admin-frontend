@@ -17,7 +17,6 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import { AUTH_REDUCER, USER } from '../../redux/Auth/constants';
 import { PERMISSIONS } from '../../redux/Permission/constants';
 import isUserAccessible from '../../utils/isUserAccessible';
-import { USER_TYPE } from '../../redux/Subuser/constants';
 import { getOrderList, setCompleteOrderToFormAction, setSelectedorderForDeletingAction, toggleOrderFormVisibleAction } from '../../redux/Order/actions';
 import {
   ORDER_LIST, ORDER_REDUCER,
@@ -34,6 +33,7 @@ import {
 } from '../../redux/Order/constants';
 import { Link } from 'react-router-dom';
 import { getTotalNumberOfQuantityFromProducts } from '../../methods/Orders/getTotalNumberOfQuantityFromProducts';
+import { SUBUSER_FULL_ACCESS, USER_TYPE } from '../../redux/Subuser/constants';
 
 const OrderListTable = () => {
   const dispatch = useDispatch();
@@ -48,6 +48,7 @@ const OrderListTable = () => {
   const clickDeleteButton = (selectedObj) => {
     dispatch(setSelectedorderForDeletingAction(selectedObj));
   }
+  const isAccessible = isUserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions, authReducerState?.[USER]?.[USER_TYPE]);
 
   const columns = [
     {
@@ -99,10 +100,10 @@ const OrderListTable = () => {
         // console.log("obj=>", obj);
         return (<>
           <ButtonGroup variant="text" aria-label="text button group">
-            <Button onClick={() => clickEditButton(obj)}>
+            <Button disabled={isAccessible ? false : true} onClick={() => clickEditButton(obj)}>
               <FontAwesomeIcon icon={faEdit} />
             </Button>
-            <Button onClick={() => clickDeleteButton(obj)}>
+            <Button disabled={isAccessible ? false : true} onClick={() => clickDeleteButton(obj)}>
               <FontAwesomeIcon icon={faTrash} />
             </Button>
           </ButtonGroup>

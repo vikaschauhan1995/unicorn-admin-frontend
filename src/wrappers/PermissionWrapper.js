@@ -13,8 +13,17 @@ const PermissionWrapper = ({ user_type, children }) => {
   const allPermissionObjects = authReducerState?.[AUTH_REDUCER]?.[USER]?.[PERMISSIONS];
   const allActiveComponents = getActiveComponents(allPermissionObjects);
   allActiveComponents.push("");
-  const isAccessible = isRouteAccessible(location.pathname, allActiveComponents, user_type);
-  // console.log("user_type=>", user_type)
+  let routeRemovedPath = location?.pathname?.substr(1, location.pathname.length);
+  try {
+    const l = routeRemovedPath.split("/");
+    if (l.length > 1) {
+      routeRemovedPath = l[0];
+    }
+  } catch (error) {
+    throw Error("Error: " + error.message);
+  }
+  const isAccessible = isRouteAccessible(routeRemovedPath, allActiveComponents, user_type);
+  // console.log("routeRemovedPath, allActiveComponents, isAccessible=>", routeRemovedPath, allActiveComponents, isAccessible);
   if (isAccessible) {
     return (
       <>
@@ -22,6 +31,7 @@ const PermissionWrapper = ({ user_type, children }) => {
       </>
     )
   } else {
+    console.log("location.pathname, allActiveComponents, user_type=>", location.pathname, allActiveComponents, user_type)
     return (
       <Navigate to="/" />
     );
