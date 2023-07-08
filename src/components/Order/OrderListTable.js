@@ -32,6 +32,7 @@ import {
   ORDER_MODIFIED_LAST,
   ORDER_FORM_DATA
 } from '../../redux/Order/constants';
+import { Link } from 'react-router-dom';
 
 const OrderListTable = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,13 @@ const OrderListTable = () => {
   }
 
   const columns = [
-    { id: "_id", label: 'ID', minWidth: 70 },
+    {
+      label: 'ID', minWidth: 70, action: (obj) => {
+        return (
+          <Link to={`/order/${obj?._id}`}>{obj?._id}</Link>
+        );
+      }
+    },
     { id: ORDER_NAME, label: 'Name', minWidth: 70 },
     { id: ORDER_MOBILE, label: 'Mobile', minWidth: 100 },
     // { id: ORDER_ADDRESS, label: 'Address', minWidth: 150 },

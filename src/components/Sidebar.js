@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import getActiveComponents from '../utils/getActiveComponents';
 import { USER_TYPE } from '../redux/Subuser/constants';
 
-const ORDER_PAGE_OBJ = { key: 'order', title: 'Orders' };
+const ORDER_PAGE_OBJ = { key: 'orders', title: 'Orders' };
 const SUB_USER_PAGE_OBJ = { key: 'subuser', title: 'Sub-Users' };
 const PRODUCT_PAGE_OBJ = { key: 'product', title: 'Products' };
 const INVENTORY_PAGE_OBJ = { key: 'inventory', title: 'Inventory' };

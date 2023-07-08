@@ -109,7 +109,7 @@ const AddSubuserForm = () => {
         <Form.Control className="my-2" as="select" multiple onChange={e => setField([].slice.call(e.target.selectedOptions).map(item => item.value))}>
           {optionsListCreated()}
         </Form.Control>
-        <Button variant="contained" className={style.btn} disabled={isAccessible ? subuserReducerState?.[IS_SAVE_SUBUSER_LOADING] : true}>Submit</Button>
+        <Button variant="contained" type="submit" className={style.btn} disabled={isAccessible ? subuserReducerState?.[IS_SAVE_SUBUSER_LOADING] : true}>Submit</Button>
       </form>
       <p className="text-danger">*Sub-user can not be edited, but can be deleted with its given permissions</p>
       {subuserReducerState[IS_SAVE_SUBUSER_ERROR] && <Alert key="danger" variant="danger">

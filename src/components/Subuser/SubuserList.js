@@ -9,6 +9,8 @@ import { AUTH_REDUCER, USER } from '../../redux/Auth/constants';
 import style from '../../style/Button.module.scss';
 import isUserAccessible from '../../utils/isUserAccessible';
 import { PERMISSIONS } from '../../redux/Permission/constants';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRotateRight } from "@fortawesome/free-solid-svg-icons";
 
 import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
@@ -56,13 +58,18 @@ const SubuserList = () => {
     });
     return l;
   }
+  const clickRefreshButton = () => {
+    dispatch(getAllSubusersAction(authReducerState?.[USER]?._id));
+  }
   // console.log("subuserReducerState=>", subuserReducerState);
   useEffect(() => {
     dispatch(getAllSubusersAction(authReducerState?.[USER]?._id));
   }, [dispatch, authReducerState]);
   return (
     <div>
-      <strong>Sub-User List</strong>
+      <strong>Sub-User List:</strong> <Button onClick={() => clickRefreshButton()}>
+        <FontAwesomeIcon icon={faArrowRotateRight} />
+      </Button>refresh
       {list()}
     </div>
   )
