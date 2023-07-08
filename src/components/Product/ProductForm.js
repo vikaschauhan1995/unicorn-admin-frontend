@@ -5,7 +5,7 @@ import Alert from 'react-bootstrap/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   IS_PRODUCT_FORM_VISIBLE, PRODUCT_FORM_DATA, PRODUCT_NAME, PRODUCT_REDUCER, PRODUCT_SKU, PRODUCT_NAME_ERROR,
-  PRODUCT_SKU_ERROR, PRODUCT_QUANTITY_ERROR, PRODUCT_QUANTITY,
+  PRODUCT_SKU_ERROR, PRODUCT_QUANTITY_ERROR, PRODUCT_PRICE_ERROR, PRODUCT_QUANTITY, PRODUCT_PRICE,
   PRODUCT_IMAGES,
   PRODUCT_CREATED_BY_ID,
   PRODUCT_CREATED_BY_EMAIL,
@@ -26,7 +26,8 @@ const ProductForm = () => {
   const [formStateError, setFormStateError] = useState({
     [PRODUCT_NAME_ERROR]: false,
     [PRODUCT_SKU_ERROR]: false,
-    [PRODUCT_QUANTITY_ERROR]: false
+    [PRODUCT_QUANTITY_ERROR]: false,
+    [PRODUCT_PRICE_ERROR]: false
   });
   const handleFieldChange = (event) => {
     const value = event.target.value;
@@ -62,6 +63,7 @@ const ProductForm = () => {
   const productName = productReducerState?.[PRODUCT_FORM_DATA]?.[PRODUCT_NAME];
   const productSKU = productReducerState?.[PRODUCT_FORM_DATA]?.[PRODUCT_SKU];
   const productQuantity = productReducerState?.[PRODUCT_FORM_DATA]?.[PRODUCT_QUANTITY];
+  const productPrice = productReducerState?.[PRODUCT_FORM_DATA]?.[PRODUCT_PRICE];
   // console.log("formStateError=>", formStateError);
   const checkFieldsValidation = () => {
     if (!productName.length) {
@@ -79,6 +81,11 @@ const ProductForm = () => {
         return { ...oldState, [PRODUCT_QUANTITY_ERROR]: true }
       });
     }
+    if (productPrice <= 0) {
+      setFormStateError(oldState => {
+        return { ...oldState, [PRODUCT_PRICE_ERROR]: true }
+      });
+    }
   }
   const clickSaveButton = () => {
     checkFieldsValidation();
@@ -87,6 +94,7 @@ const ProductForm = () => {
         [PRODUCT_NAME]: productName,
         [PRODUCT_SKU]: productSKU,
         [PRODUCT_QUANTITY]: productQuantity,
+        [PRODUCT_PRICE]: productPrice,
         // [PRODUCT_IMAGES]:[],
         [PRODUCT_CREATED_BY_ID]: authReducerState?.[USER]?._id,
         [PRODUCT_CREATED_BY_EMAIL]: authReducerState?.[USER]?.email
@@ -101,7 +109,8 @@ const ProductForm = () => {
         [PRODUCT_ID]: productReducerState?.[PRODUCT_FORM_DATA]?.[PRODUCT_ID],
         [PRODUCT_NAME]: productName,
         [PRODUCT_SKU]: productSKU,
-        [PRODUCT_QUANTITY]: productQuantity
+        [PRODUCT_QUANTITY]: productQuantity,
+        [PRODUCT_PRICE]: productPrice
         // [PRODUCT_IMAGES]:[],
         // [PRODUCT_CREATED_BY_ID]: authReducerState?.[USER]?._id,
         // [PRODUCT_CREATED_BY_EMAIL]: authReducerState?.[USER]?.email
@@ -145,6 +154,18 @@ const ProductForm = () => {
               shrink: true,
             }}
             value={productQuantity}
+            variant="outlined"
+          />
+          <TextField
+            name={PRODUCT_PRICE}
+            onChange={handleNumberFieldChange}
+            error={formStateError?.[PRODUCT_PRICE_ERROR]}
+            label="Price"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={productPrice}
             variant="outlined"
           />
         </Box>

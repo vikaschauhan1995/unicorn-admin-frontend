@@ -33,6 +33,7 @@ import {
   ORDER_FORM_DATA
 } from '../../redux/Order/constants';
 import { Link } from 'react-router-dom';
+import { getTotalNumberOfQuantityFromProducts } from '../../methods/Orders/getTotalNumberOfQuantityFromProducts';
 
 const OrderListTable = () => {
   const dispatch = useDispatch();
@@ -56,9 +57,15 @@ const OrderListTable = () => {
         );
       }
     },
-    { id: ORDER_NAME, label: 'Name', minWidth: 70 },
+    { id: ORDER_NAME, label: 'Name', minWidth: 30 },
     { id: ORDER_MOBILE, label: 'Mobile', minWidth: 100 },
-    // { id: ORDER_ADDRESS, label: 'Address', minWidth: 150 },
+    {
+      label: 'Items', align: 'center', minWidth: 30, action: (obj) => {
+        const numberOfItems = getTotalNumberOfQuantityFromProducts(obj?.[ORDER_PRODUCTS]);
+        // console.log("obj=>", obj);
+        return numberOfItems;
+      }
+    },
     { id: ORDER_STATE, label: 'State', minWidth: 30 },
     { id: ORDER_PIN, label: 'Pin', minWidth: 30 },
     {

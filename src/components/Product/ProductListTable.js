@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProductAction, getProductListAction, removeSelectedProductForDeletingAction, setProductFormVisibilityAction, setProductInProductFormAction, setSelectedProductForDeleting } from '../../redux/Product/actions';
-import { PRODUCT_LIST, PRODUCT_NAME, PRODUCT_REDUCER, PRODUCT_SKU, PRODUCT_CREATED_BY_EMAIL, PRODUCT_CREATED_AT, PRODUCT_MODIFIED_LAST, IS_PRODUCT_LIST_LOADING, SELECTED_PRODUCT_FOR_DELETING, PRODUCT_ID, IS_PRODUCT_DELETING, PRODUCT_FULL_ACCESS, PRODUCT_QUANTITY } from '../../redux/Product/constants';
+import { PRODUCT_LIST, PRODUCT_NAME, PRODUCT_REDUCER, PRODUCT_SKU, PRODUCT_CREATED_BY_EMAIL, PRODUCT_CREATED_AT, PRODUCT_MODIFIED_LAST, IS_PRODUCT_LIST_LOADING, SELECTED_PRODUCT_FOR_DELETING, PRODUCT_ID, IS_PRODUCT_DELETING, PRODUCT_FULL_ACCESS, PRODUCT_QUANTITY, PRODUCT_PRICE } from '../../redux/Product/constants';
 import formatDistance from 'date-fns/formatDistanceToNowStrict';
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -42,6 +42,7 @@ export default function ProductListTable() {
     { id: PRODUCT_NAME, label: 'Name', minWidth: 170 },
     { id: PRODUCT_SKU, label: 'SKU', minWidth: 100 },
     { id: PRODUCT_QUANTITY, label: 'Qty', minWidth: 30 },
+    { id: PRODUCT_PRICE, label: 'Price', minWidth: 30 },
     {
       id: PRODUCT_CREATED_BY_EMAIL,
       label: 'Created By',
