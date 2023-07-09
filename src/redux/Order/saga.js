@@ -54,6 +54,8 @@ function* getOrderList() {
   }
 }
 
+// function* getOrder() { }
+
 function* updateOrder(params) {
   try {
     yield put({ type: SET_IS_SAVE_ORDER_LOADING, payload: true });

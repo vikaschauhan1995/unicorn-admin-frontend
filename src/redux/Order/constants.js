@@ -66,6 +66,7 @@ export const DELETE_ORDER_ACTION = 'delete_order_action';
 export const REMOVE_AN_ORDER_FROM_ORDER_LIST = 'remove_an_order_from_order_list';
 
 export const GET_ORDER_LIST = 'get_order_list';
+export const GET_ORDER = 'get_order';
 
 // actions for loading
 export const SET_IS_SAVE_ORDER_LOADING = 'set_save_order_loading';
