@@ -26,7 +26,7 @@ const Orders = () => {
   }
   const authReducerState = useSelector(state => state[AUTH_REDUCER]);
   const isAccessible = isUserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions, authReducerState?.[USER]?.[USER_TYPE]);
-  console.log("authReducerState=>", authReducerState);
+  // console.log("authReducerState=>", authReducerState);
   useEffect(() => {
     dispatch(getProductListAction());
   }, [dispatch]);

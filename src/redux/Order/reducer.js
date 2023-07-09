@@ -41,7 +41,13 @@ import {
   REMOVE_SELECTED_ORDER_FOR_DELETING_ACTION,
   SET_IS_DELETE_ORDER_LOADING,
   IS_DELETE_ORDER_LOADING,
-  REMOVE_AN_ORDER_FROM_ORDER_LIST
+  REMOVE_AN_ORDER_FROM_ORDER_LIST,
+  ORDER_FOR_ORDER_PAGE,
+  SET_ORDER_FOR_ORDER_PAGE,
+  SET_GET_ORDER_LOADING,
+  GET_ORDER_LOADING,
+  SET_ORDER_PROCEED_LOADING,
+  ORDER_PROCEED_LOADING,
 } from "./constants";
 
 
@@ -78,10 +84,14 @@ const initialState = {
   },
   [IS_SAVE_ORDER_LOADING]: false,
   [IS_GET_ORDER_LOADING]: false,
+  [ORDER_PROCEED_LOADING]: false,
 
   [ORDER_LIST]: [],
   [SELECTED_ORDER_FOR_DELETING]: null,
   [IS_DELETE_ORDER_LOADING]: false,
+
+  // order page
+  [ORDER_FOR_ORDER_PAGE]: null,
 }
 
 export const reducer = (state = initialState, action) => {
@@ -290,6 +300,12 @@ export const reducer = (state = initialState, action) => {
           [ORDER_LIST]: newList
         }
       }
+    case SET_GET_ORDER_LOADING:
+      return { ...state, [GET_ORDER_LOADING]: action?.payload };
+    case SET_ORDER_FOR_ORDER_PAGE:
+      return { ...state, [ORDER_FOR_ORDER_PAGE]: action?.payload };
+    case SET_ORDER_PROCEED_LOADING:
+      return { ...state, [ORDER_PROCEED_LOADING]: action?.payload };
     default:
       return state;
   }

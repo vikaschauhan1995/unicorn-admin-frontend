@@ -24,6 +24,12 @@ export const ORDER_MODIFIED_LAST = 'modified_last';
 export const CUSTOM_ORDER_GENERATE_KEY = 'custom';
 const PROGRAM_ORDER_GENERATE_KEY = 'program';
 
+export const ORDER_STATUS = 'status';
+export const ORDER_STATUS_CREATED = 'created';
+export const ORDER_STATUS_CANCELED = 'canceled';
+export const ORDER_STATUS_DISPATCHED = 'dispatched';
+export const orderStatuses = [ORDER_STATUS_CREATED, ORDER_STATUS_CANCELED, ORDER_STATUS_DISPATCHED];
+
 // error keys for form fields
 export const FORM_STATE_ERRORS = 'form_state_error';
 export const ORDER_NAME_ERROR = 'name_error';
@@ -64,6 +70,7 @@ export const SELECTED_ORDER_FOR_DELETING = 'selected_order_for_deleting';
 export const REMOVE_SELECTED_ORDER_FOR_DELETING_ACTION = 'remove_selected_order_for_deleting_action';
 export const DELETE_ORDER_ACTION = 'delete_order_action';
 export const REMOVE_AN_ORDER_FROM_ORDER_LIST = 'remove_an_order_from_order_list';
+export const ORDER_PROCEED_ACTION = 'order_proceed_action';
 
 export const GET_ORDER_LIST = 'get_order_list';
 export const GET_ORDER = 'get_order';
@@ -71,9 +78,17 @@ export const GET_ORDER = 'get_order';
 // actions for loading
 export const SET_IS_SAVE_ORDER_LOADING = 'set_save_order_loading';
 export const IS_SAVE_ORDER_LOADING = 'is_save_order_loading';
+export const SET_GET_ORDER_LOADING = 'set_get_order_loading';
+export const GET_ORDER_LOADING = 'get_order_loading';
 
 export const SET_IS_GET_ORDER_LOADING = 'set_save_order_loading';
 export const IS_GET_ORDER_LOADING = 'is_get_order_loading';
 
 export const SET_IS_DELETE_ORDER_LOADING = 'set_delete_order_loading';
 export const IS_DELETE_ORDER_LOADING = 'is_delete_order_loading';
+
+export const SET_ORDER_FOR_ORDER_PAGE = 'set_order_for_order_page';
+export const ORDER_FOR_ORDER_PAGE = 'order_for_order_page';
+
+export const SET_ORDER_PROCEED_LOADING = 'set_order_proceed_loading';
+export const ORDER_PROCEED_LOADING = 'order_proceed_loading';

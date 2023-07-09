@@ -1,2 +1,7 @@
 @import '__dimen.scss';
 @import '__color.scss';
+
+.Order__upper_head {
+  display: flex;
+  justify-content: space-between;
+}

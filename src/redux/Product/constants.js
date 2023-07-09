@@ -23,6 +23,7 @@ export const MAKE_PRODUCT_FORM_DATA_EMPTY = 'make_product_form_data_empty';
 export const SET_PRODUCT_IN_PRODUCT_FORM_ACTION = 'set_product_in_product_form_action';
 export const REMOVE_PRODUCT_FORM_ERROR_ACTION = 'remove_product_form_error_action';
 export const UPDATE_PRODUCT_ACTION = 'update_product_action';
+export const UPDATE_MULTIPLE_PRODUCTS_FROM_PRODUCT_LIST_ACTION = 'update_multiple_products_from_product_list_action';
 
 // Reducer keys
 export const IS_PRODUCT_FORM_VISIBLE = 'is_product_form_visible';
