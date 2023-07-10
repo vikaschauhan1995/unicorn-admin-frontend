@@ -71,6 +71,7 @@ export const REMOVE_SELECTED_ORDER_FOR_DELETING_ACTION = 'remove_selected_order_
 export const DELETE_ORDER_ACTION = 'delete_order_action';
 export const REMOVE_AN_ORDER_FROM_ORDER_LIST = 'remove_an_order_from_order_list';
 export const ORDER_PROCEED_ACTION = 'order_proceed_action';
+export const GET_ALL_DELIVERED_ORDERS_ACTION = 'get_all_delivered_orders_action';
 
 export const GET_ORDER_LIST = 'get_order_list';
 export const GET_ORDER = 'get_order';
@@ -92,3 +93,9 @@ export const ORDER_FOR_ORDER_PAGE = 'order_for_order_page';
 
 export const SET_ORDER_PROCEED_LOADING = 'set_order_proceed_loading';
 export const ORDER_PROCEED_LOADING = 'order_proceed_loading';
+
+export const SET_IS_ALL_DELIVERED_ORDERS_LOADING = 'set_is_all_delivered_orders_loading';
+export const IS_ALL_DELIVERED_ORDERS_LOADING = 'is_all_delivered_orders_loading';
+
+export const SET_ALL_DELIVERED_ORDERS_TO_DELIVERED_ORDERS_PAGE = 'set_all_delivered_orders_to_delivered_orders_page';
+export const ALL_DELIVERED_ORDERS_TO_DELIVERED_ORDERS_PAGE = 'all_delivered_orders_to_delivered_orders_page';

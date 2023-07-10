@@ -10,6 +10,9 @@ import {
   GET_ORDER,
   ORDER_PROCEED_ACTION,
   SET_ORDER_PROCEED_LOADING,
+  GET_ALL_DELIVERED_ORDERS_ACTION,
+  SET_IS_ALL_DELIVERED_ORDERS_LOADING,
+  SET_ALL_DELIVERED_ORDERS_TO_DELIVERED_ORDERS_PAGE,
 } from './constants';
 import { BASE_URL } from '../../constants';
 import { UPDATE_MULTIPLE_PRODUCTS_FROM_PRODUCT_LIST_ACTION } from '../Product/constants';
@@ -150,6 +153,26 @@ function* orderProceed(params) {
   }
 }
 
+function* getAllDeliveredOrders() {
+  try {
+    yield put({ type: SET_IS_ALL_DELIVERED_ORDERS_LOADING, payload: true });
+    const response = yield fetch(`${BASE_URL}/api/order/delivered`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const json = yield response.json();
+    if (!response.ok) {
+      yield put({ type: SET_IS_ALL_DELIVERED_ORDERS_LOADING, payload: false });
+    }
+    if (response.ok) {
+      yield put({ type: SET_IS_ALL_DELIVERED_ORDERS_LOADING, payload: false });
+      yield put({ type: SET_ALL_DELIVERED_ORDERS_TO_DELIVERED_ORDERS_PAGE, payload: json });
+    }
+  } catch (error) {
+    console.log("error: ", error.message);
+  }
+}
+
 export default function* saga() {
   yield takeLatest(SAVE_ORDER_ACTION, saveOrder);
   yield takeLatest(GET_ORDER_LIST, getOrderList);
@@ -157,4 +180,5 @@ export default function* saga() {
   yield takeLatest(DELETE_ORDER_ACTION, deleteOrder);
   yield takeLatest(GET_ORDER, getOrder);
   yield takeLatest(ORDER_PROCEED_ACTION, orderProceed);
+  yield takeLatest(GET_ALL_DELIVERED_ORDERS_ACTION, getAllDeliveredOrders);
 }

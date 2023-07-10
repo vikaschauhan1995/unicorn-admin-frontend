@@ -15,6 +15,10 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { PRODUCT_NAME } from '../redux/Product/constants';
 import Products from '../components/Order/Products';
+import { AUTH_REDUCER, USER } from '../redux/Auth/constants';
+import { SUBUSER_FULL_ACCESS, USER_TYPE } from '../redux/Subuser/constants';
+import { PERMISSIONS } from '../redux/Permission/constants';
+import isUserAccessible from '../utils/isUserAccessible';
 
 
 
@@ -48,7 +52,8 @@ const Order = () => {
   };
   const order = ordersReducerState?.[ORDER_FOR_ORDER_PAGE];
   // console.log("ordersReducerState=>", ordersReducerState?.[ORDER_FOR_ORDER_PAGE]);
-  // const order =
+  const authReducerState = useSelector(state => state[AUTH_REDUCER]);
+  const isAccessible = isUserAccessible(SUBUSER_FULL_ACCESS, authReducerState?.[USER]?.[PERMISSIONS]?.permissions, authReducerState?.[USER]?.[USER_TYPE]);
   useEffect(() => {
     getOrder_();
   }, []);
@@ -65,6 +70,8 @@ const Order = () => {
     }
   }
   // console.log("ordersReducerState?.[ORDER_PROCEED_LOADING]=>", ordersReducerState);
+  const isButtonDisabled = !isAccessible ? true : ordersReducerState?.[ORDER_PROCEED_LOADING] ? true :
+    order?.[ORDER_STATUS] !== ORDER_STATUS_CREATED;
   if (order) {
     return (
       <div className="Order__container mx-3">
@@ -75,8 +82,7 @@ const Order = () => {
           <div>
             <Button variant="contained" onClick={() => dispatch(orderProceedAction(order))}
               disabled={
-                ordersReducerState?.[ORDER_PROCEED_LOADING] ? true :
-                  order?.[ORDER_STATUS] !== ORDER_STATUS_CREATED
+                isButtonDisabled
               }>{buttonNameByOrderStatus(order?.[ORDER_STATUS]) && buttonNameByOrderStatus(order?.[ORDER_STATUS])}</Button>
           </div>
         </div>

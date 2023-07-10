@@ -19,8 +19,9 @@ const ORDER_PAGE_OBJ = { key: 'orders', title: 'Orders' };
 const SUB_USER_PAGE_OBJ = { key: 'subuser', title: 'Sub-Users' };
 const PRODUCT_PAGE_OBJ = { key: 'product', title: 'Products' };
 const INVENTORY_PAGE_OBJ = { key: 'inventory', title: 'Inventory' };
+const DELIVERED_ORDERS_PAGE_OBJ = { key: 'delivered_orders', title: 'Delivered Orders' }
 
-const all_page_objs = [ORDER_PAGE_OBJ, SUB_USER_PAGE_OBJ, PRODUCT_PAGE_OBJ, INVENTORY_PAGE_OBJ];
+const all_page_objs = [ORDER_PAGE_OBJ, SUB_USER_PAGE_OBJ, PRODUCT_PAGE_OBJ, INVENTORY_PAGE_OBJ, DELIVERED_ORDERS_PAGE_OBJ];
 
 const makeSidebarList = (componentsArray, user_type) => {
   if (user_type === "root") {

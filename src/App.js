@@ -19,6 +19,7 @@ import PermissionWrapper from './wrappers/PermissionWrapper';
 import Product from './pages/Product';
 import Inventory from './pages/Inventory';
 import { USER_TYPE } from './redux/Subuser/constants';
+import DeliveredOrders from './pages/DeliveredOrders';
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function App() {
                       <Route exact path="/" element={<Home />} />
                       <Route exact path="/orders" element={<Orders />} />
                       <Route exact path="/order/:_id" element={<Order />} />
+                      <Route exact path="/delivered_orders" element={<DeliveredOrders />} />
                       <Route exact path="/subuser" element={<Subuser />} />
                       <Route exact path="/product" element={<Product />} />
                       <Route exact path="/inventory" element={<Inventory />} />

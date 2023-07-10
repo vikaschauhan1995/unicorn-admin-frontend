@@ -51,7 +51,6 @@ const AddSubuserForm = () => {
       [USER_TYPE]: "subuser"
     }
     dispatch(addSubUserAction(subuser));
-    console.log("subuser", JSON.stringify(subuser));
   }
   const optionsListCreated = () => {
     const pList = permissionList?.length > 0 ? permissionList : [];

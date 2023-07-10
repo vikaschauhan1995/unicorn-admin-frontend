@@ -48,6 +48,10 @@ import {
   GET_ORDER_LOADING,
   SET_ORDER_PROCEED_LOADING,
   ORDER_PROCEED_LOADING,
+  SET_ALL_DELIVERED_ORDERS_TO_DELIVERED_ORDERS_PAGE,
+  ALL_DELIVERED_ORDERS_TO_DELIVERED_ORDERS_PAGE,
+  SET_IS_ALL_DELIVERED_ORDERS_LOADING,
+  IS_ALL_DELIVERED_ORDERS_LOADING,
 } from "./constants";
 
 
@@ -92,6 +96,10 @@ const initialState = {
 
   // order page
   [ORDER_FOR_ORDER_PAGE]: null,
+
+  // delivered orders page
+  [ALL_DELIVERED_ORDERS_TO_DELIVERED_ORDERS_PAGE]: [],
+  [IS_ALL_DELIVERED_ORDERS_LOADING]: false
 }
 
 export const reducer = (state = initialState, action) => {
@@ -306,6 +314,10 @@ export const reducer = (state = initialState, action) => {
       return { ...state, [ORDER_FOR_ORDER_PAGE]: action?.payload };
     case SET_ORDER_PROCEED_LOADING:
       return { ...state, [ORDER_PROCEED_LOADING]: action?.payload };
+    case SET_IS_ALL_DELIVERED_ORDERS_LOADING:
+      return { ...state, [IS_ALL_DELIVERED_ORDERS_LOADING]: action?.payload };
+    case SET_ALL_DELIVERED_ORDERS_TO_DELIVERED_ORDERS_PAGE:
+      return { ...state, [ALL_DELIVERED_ORDERS_TO_DELIVERED_ORDERS_PAGE]: action?.payload };
     default:
       return state;
   }

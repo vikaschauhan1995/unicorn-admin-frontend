@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
-import '../style/Order.scss';
+import '../style/Orders.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { IS_DELETE_ORDER_LOADING, ORDER_REDUCER, SELECTED_ORDER_FOR_DELETING } from '../redux/Order/constants';
 import OrderForm from '../components/Order/OrderForm';
