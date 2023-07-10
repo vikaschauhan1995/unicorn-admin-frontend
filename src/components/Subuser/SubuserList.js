@@ -39,9 +39,9 @@ const SubuserList = () => {
         return "You can't see the permissions of subusers";
       }
       const list = array.map((permission, index) => {
-        return <span className="Subuser_list_permission_item mx-1 px-2 py-1">{permission?.key}</span>
+        return <span className="Subuser_list_permission_item m-1 px-2 py-1">{permission?.key}</span>
       });
-      return <div>{list}</div>;
+      return <div className="Subuser_list_permission">{list}</div>;
     }
     const l = subusers?.map(subuser => {
       return <Card key={subuser?._id} className="my-2">
@@ -49,7 +49,9 @@ const SubuserList = () => {
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             <Card.Title>{subuser?.email}</Card.Title>
           </Typography>
-          <Card.Text>{permissionsList(subuser?.[PERMISSIONS]?.[0]?.permissions)}</Card.Text>
+          {/* <Card.Text> */}
+          {permissionsList(subuser?.[PERMISSIONS]?.[0]?.permissions)}
+          {/* </Card.Text> */}
           <div>
             <Button variant="contained" color="error" className={style.btn} disabled={!isAccessible ? true : subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id} onClick={() => clickDeleteButton(subuser)}>{subuserReducerState?.[SUBUSER_DELETE_LOADING] === subuser._id ? 'Loading' : 'Delete'}</Button>
           </div>

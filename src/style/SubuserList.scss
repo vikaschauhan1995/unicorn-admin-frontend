@@ -1,8 +1,14 @@
 @import '__dimen.scss';
 @import '__color.scss';
 
+
+.Subuser_list_permission {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .Subuser_list_permission_item {
   border-radius: 9px;
   background-color: #ebebeb;
-
+  float: left
 }
